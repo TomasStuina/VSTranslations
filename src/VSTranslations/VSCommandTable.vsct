@@ -4,6 +4,7 @@
   <Extern href="stdidcmd.h"/>
   <Extern href="vsshlids.h"/>
   <Include href="KnownImageIds.vsct"/>
+  <Include href="IconMonikers.vsct"/>
   <Include href="VSGlobals.vsct"/>
 
   <Commands package="VSTranslations">
@@ -11,10 +12,12 @@
       <Group guid="VSTranslations" id="MyMenuGroup" priority="0x0600">
         <Parent guid="VSMainMenu" id="Tools"/>
       </Group>
+
+      <Group guid="VSTranslations" id="VSTranslations_ContextTranslateMenuGroup" priority="0x0401">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN"/>
+      </Group>
     </Groups>
 
-    <!--This section defines the elements the user can interact with, like a menu command or a button
-        or combo box in a toolbar. -->
     <Buttons>
       <Button guid="VSTranslations" id="MyCommand" priority="0x0100" type="Button">
         <Parent guid="VSTranslations" id="MyMenuGroup" />
@@ -25,6 +28,24 @@
           <LocCanonicalName>.VSTranslations.MyCommand</LocCanonicalName>
         </Strings>
       </Button>
+
+      <Button guid="VSTranslations" id="VSTranslations_ContextTranslateMenu_TranslateId" priority="0x9000" type="Button">
+        <Parent guid="VSTranslations" id="VSTranslations_ContextTranslateMenuGroup" />
+        <Icon guid="ImageCatalogGuid" id="Translate" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Translate...</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="VSTranslations" id="VSTranslations_ContextTranslateMenu_DeleteTranslationId" priority="0x9001" type="Button">
+        <Parent guid="VSTranslations" id="VSTranslations_ContextTranslateMenuGroup" />
+        <Icon guid="DeleteTranslationMoniker" id="DeleteTranslationId"/>
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Delete Translation</ButtonText>
+        </Strings>
+      </Button>
     </Buttons>
   </Commands>
 
@@ -32,6 +53,11 @@
     <GuidSymbol name="VSTranslations" value="{c7c1ae20-bc53-41bc-8ba1-33a34163f8ee}">
       <IDSymbol name="MyMenuGroup" value="0x0001" />
       <IDSymbol name="MyCommand" value="0x0100" />
+      <IDSymbol name="VSTranslations_ContextTranslateMenu_TranslateId" value="0x0101" />
+      <IDSymbol name="VSTranslations_ContextTranslateMenu_DeleteTranslationId" value="0x0102" />
+
+      <IDSymbol name="VSTranslations_ContextTranslateMenuGroup" value="0x0130" />
+      <IDSymbol name="VSTranslations_ContextTranslateMenu" value="0x0131" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>
