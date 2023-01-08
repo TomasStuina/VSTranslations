@@ -19,7 +19,7 @@ namespace VSTranslations.Services.Translating
 
         public async Task<TextLinesCollection> TranslateAsync(SnapshotSpan snapshotSpan)
         {
-            var textLinesToTranslate = snapshotSpan.GetLines();
+            var textLinesToTranslate = snapshotSpan.GetLinesCollection();
             var translatorEngine = _translatorEngineProvider.Get();
 
             if (translatorEngine is null)

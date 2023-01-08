@@ -3,6 +3,9 @@ using System.IO;
 
 namespace VSTranslations.Extensions
 {
+    /// <summary>
+    /// <see cref="string"/> extensions.
+    /// </summary>
     public static class StringExtensions
     {
         private const char OpeningBracket = '{';
@@ -10,6 +13,12 @@ namespace VSTranslations.Extensions
         private const char Semicolon = ';';
         private const char Comma = ',';
 
+        /// <summary>
+        /// Splits <paramref name="input"/> string value into multiple
+        /// line strings where the separator is a new line symbol.
+        /// </summary>
+        /// <param name="input">String value to split.</param>
+        /// <returns><see cref="IEnumerable{string}"/> of split lines.</returns>
         public static IEnumerable<string> SplitToLines(this string input)
         {
             if (input is null)
@@ -17,21 +26,30 @@ namespace VSTranslations.Extensions
                 yield break;
             }
 
-            using (var reader = new StringReader(input))
+            using var reader = new StringReader(input);
+
+            string line;
+            while ((line = reader.ReadLine()) is not null)
             {
-                string line;
-                while (!((line = reader.ReadLine()) is null))
-                {
-                    yield return line;
-                }
+                yield return line;
             }
         }
 
+        /// <summary>
+        /// Checks if the given text is '{' string value.
+        /// </summary>
+        /// <param name="text">String value to check.</param>
+        /// <returns><c>true</c> if it is. Otherwise - <c>false</c></returns>
         public static bool IsOpening(this string text)
         {
             return text.Length == 1 && text[0] == OpeningBracket;
         }
 
+        /// <summary>
+        /// Checks if the given text is '}', ';', or ',' string value.
+        /// </summary>
+        /// <param name="text">String value to check.</param>
+        /// <returns><c>true</c> if it is. Otherwise - <c>false</c></returns>
         public static bool IsClosing(this string text)
         {
             if (text.Length == 0 || text.Length > 2)
