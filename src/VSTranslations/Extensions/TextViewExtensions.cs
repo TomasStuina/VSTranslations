@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.Text.Editor;
 using VSTranslations.Abstractions.Tagging;
 using VSTranslations.Services.Tagging;
+using VSTranslations.Common.Extensions;
 
 namespace VSTranslations.Extensions
 {
@@ -18,12 +19,7 @@ namespace VSTranslations.Extensions
         /// <exception cref="ArgumentNullException">When <paramref name="textView"/> is <c>null</c>.</exception>
         public static ITranslatedLineGlyphTagsStore GetOrCreateTranslatedLineGlyphTagsStore(this ITextView textView)
         {
-            if (textView is null)
-            {
-                throw new ArgumentNullException(nameof(textView));
-            }
-
-            return textView.Properties.GetOrCreateSingletonProperty<ITranslatedLineGlyphTagsStore>(() => {
+            return textView.ThrowIfNull(nameof(textView)).Properties.GetOrCreateSingletonProperty<ITranslatedLineGlyphTagsStore>(() => {
                 return new TranslatedLineGlyphTagsStore();
             });
         }

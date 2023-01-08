@@ -1,31 +1,40 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using VSTranslations.Abstractions.Tagging;
 using VSTranslations.Abstractions.Translating;
+using VSTranslations.Common.Extensions;
 using VSTranslations.Glyphs;
 
 namespace VSTranslations.Extensions
 {
     internal static class TranslatedLineGlyphTagsStoreExtensions
     {
-        public static void Add(this ITranslatedLineGlyphTagsStore translatedTagsPersistence, TextLinesCollection textLines)
+        public static void Add(this ITranslatedLineGlyphTagsStore translatedLineGlyphTagsStore, TextLinesCollection textLines)
         {
+            translatedLineGlyphTagsStore.ThrowIfNull(nameof(translatedLineGlyphTagsStore));
+            textLines.ThrowIfNull(nameof(textLines));
+
             foreach (var textLine in textLines)
             {
-                translatedTagsPersistence.Add(textLine);
+                translatedLineGlyphTagsStore.Add(textLine);
             }
         }
 
-        public static void Add(this ITranslatedLineGlyphTagsStore translatedTagsPersistence, TextLine textLine)
+        public static void Add(this ITranslatedLineGlyphTagsStore translatedLineGlyphTagsStore, TextLine textLine)
         {
-            translatedTagsPersistence.Add(textLine.LineSpan, textLine.Text);
+            translatedLineGlyphTagsStore.ThrowIfNull(nameof(translatedLineGlyphTagsStore));
+            textLine.ThrowIfNull(nameof(textLine));
+
+            translatedLineGlyphTagsStore.Add(textLine.LineSpan, textLine.Text);
         }
 
-        public static void RemoveTags(this ITranslatedLineGlyphTagsStore translatedTagsPersistence, IEnumerable<TranslatedLineGlyphTag> glyphTags)
+        public static void RemoveTags(this ITranslatedLineGlyphTagsStore translatedLineGlyphTagsStore, IEnumerable<TranslatedLineGlyphTag> glyphTags)
         {
-            foreach(var glyphTag in glyphTags)
+            translatedLineGlyphTagsStore.ThrowIfNull(nameof(translatedLineGlyphTagsStore));
+            glyphTags.ThrowIfNull(nameof(glyphTags));
+
+            foreach (var glyphTag in glyphTags)
             {
-                translatedTagsPersistence.Remove(glyphTag);
+                translatedLineGlyphTagsStore.Remove(glyphTag);
             }
         }
     }

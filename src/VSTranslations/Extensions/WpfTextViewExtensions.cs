@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text;
+using VSTranslations.Common.Extensions;
 
 namespace VSTranslations.Extensions
 {
@@ -21,6 +22,8 @@ namespace VSTranslations.Extensions
         /// <returns><see cref="SnapshotSpan"/> instance.</returns>
         public static SnapshotSpan GetSelectedSnapshotSpan(this IWpfTextView textView)
         {
+            textView.ThrowIfNull(nameof(textView));
+
             if (textView.Selection.IsEmpty)
             {
                 var line = textView.Caret.Position.BufferPosition.GetContainingLine();

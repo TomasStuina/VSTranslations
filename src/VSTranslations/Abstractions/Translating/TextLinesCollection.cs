@@ -6,7 +6,7 @@ namespace VSTranslations.Abstractions.Translating
 {
     public class TextLinesCollection : IEnumerable<TextLine>
     {
-        private readonly LinkedList<TextLine> _lines = new LinkedList<TextLine>();
+        private readonly LinkedList<TextLine> _lines = new();
 
         public void Add(TextLine line) => _lines.AddLast(line);
 

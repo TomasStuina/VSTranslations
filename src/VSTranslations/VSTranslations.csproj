@@ -53,7 +53,6 @@
     <Compile Include="Commands\DeleteTranslationCommand.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\SnapshotSpanExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TextViewExtensions.cs" />
     <Compile Include="Extensions\TranslatedLineGlyphTagsStoreExtensions.cs" />
     <Compile Include="Extensions\ViewTagAggregatorFactoryServiceExtensions.cs" />
@@ -150,6 +149,10 @@
     <Folder Include="Services\Adornment\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VSTranslations.Common\VSTranslations.Common.csproj">
+      <Project>{9fbf47e3-cfca-4c58-a33e-464c1e163022}</Project>
+      <Name>VSTranslations.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VSTranslations.Plugin.Abstractions\VSTranslations.Plugin.Abstractions.csproj">
       <Project>{aa3a0d36-25ad-47e5-910b-2632a6569ab5}</Project>
       <Name>VSTranslations.Plugin.Abstractions</Name>

@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using VSTranslations.Abstractions.Translating;
+using VSTranslations.Common.Extensions;
 using VSTranslations.Extensions;
 
 namespace VSTranslations.Services.Translating

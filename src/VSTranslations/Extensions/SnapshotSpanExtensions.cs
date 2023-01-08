@@ -1,13 +1,14 @@
 ﻿using Microsoft.VisualStudio.Text;
 using System.Collections.Generic;
 using VSTranslations.Abstractions.Translating;
+using VSTranslations.Common.Extensions;
 
 namespace VSTranslations.Extensions
 {
     /// <summary>
     /// <see cref="SnapshotSpan"/> extensions.
     /// </summary>
-    public static class SnapshotSpanExtensions
+    internal static class SnapshotSpanExtensions
     {
         /// <summary>
         /// Gets a <see cref="TextLinesCollection"/> instance for the given <see cref="SnapshotSpan"/>.
@@ -21,7 +22,7 @@ namespace VSTranslations.Extensions
         {
             var textLinesCollection = new TextLinesCollection();
 
-            foreach (var lineSpan in span.GetLinesSnapshots())
+            foreach (var lineSpan in span.GetLinesSnapshotSpans())
             {
                 var trimmedLine = lineSpan.GetText().Trim();
                 if (trimmedLine.Length == 0 || trimmedLine.IsOpening() || trimmedLine.IsClosing())
@@ -36,26 +37,12 @@ namespace VSTranslations.Extensions
         }
 
         /// <summary>
-        /// Gets a <see cref="IEnumerable{string}"/> of trimmed lines from the given
-        /// <see cref="SnapshotSpan"/> instance.
-        /// </summary>
-        /// <param name="span"><see cref="SnapshotSpan"/> instance to get from.</param>
-        /// <returns><see cref="IEnumerable{string}"/> isntance.</returns>
-        public static IEnumerable<string> GetTrimmedLinesText(this SnapshotSpan span)
-        {
-            foreach (var lineSpan in span.GetLinesSnapshots())
-            {
-                yield return lineSpan.GetText().Trim();
-            }
-        }
-
-        /// <summary>
         /// Gets a <see cref="IEnumerable{SnapshotSpan}"/> of lines from the given
         /// <see cref="SnapshotSpan"/> instance.
         /// </summary>
         /// <param name="span"><see cref="SnapshotSpan"/> instance to get from.</param>
         /// <returns><see cref="IEnumerable{SnapshotSpan}"/> instance.</returns>
-        public static IEnumerable<SnapshotSpan> GetLinesSnapshots(this SnapshotSpan span)
+        public static IEnumerable<SnapshotSpan> GetLinesSnapshotSpans(this SnapshotSpan span)
         {
             var startLineNumber = span.Start.GetContainingLine().LineNumber;
             var endLineNumber = (span.End - 1).GetContainingLine().LineNumber;
@@ -67,7 +54,7 @@ namespace VSTranslations.Extensions
             }
 
             var snapshot = span.Snapshot;
-            for (int i = startLineNumber; i <= endLineNumber; i++)
+            for (var i = startLineNumber; i <= endLineNumber; i++)
             {
                 var line = snapshot.GetLineFromLineNumber(i);
                 if (i == startLineNumber)

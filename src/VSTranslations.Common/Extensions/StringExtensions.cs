@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace VSTranslations.Extensions
+namespace VSTranslations.Common.Extensions
 {
     /// <summary>
     /// <see cref="string"/> extensions.
@@ -21,7 +21,7 @@ namespace VSTranslations.Extensions
         /// <returns><see cref="IEnumerable{string}"/> of split lines.</returns>
         public static IEnumerable<string> SplitToLines(this string input)
         {
-            if (input is null)
+            if (string.IsNullOrEmpty(input))
             {
                 yield break;
             }
@@ -42,7 +42,7 @@ namespace VSTranslations.Extensions
         /// <returns><c>true</c> if it is. Otherwise - <c>false</c></returns>
         public static bool IsOpening(this string text)
         {
-            return text.Length == 1 && text[0] == OpeningBracket;
+            return text is not null && text.Length == 1 && text[0] == OpeningBracket;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace VSTranslations.Extensions
         /// <returns><c>true</c> if it is. Otherwise - <c>false</c></returns>
         public static bool IsClosing(this string text)
         {
-            if (text.Length == 0 || text.Length > 2)
+            if (text is null || text.Length == 0 || text.Length > 2)
             {
                 return false;
             }
