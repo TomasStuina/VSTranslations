@@ -9,10 +9,13 @@ namespace VSTranslations.Glyphs
         {
             Span = span.Snapshot.CreateTrackingSpan(span, SpanTrackingMode.EdgeExclusive);
             Text = text;
+            IsActive = true;
         }
 
         public ITrackingSpan Span { get; }
 
         public string Text { get; }
+
+        public bool IsActive { get; set; }
     }
 }

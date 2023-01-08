@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 using VSTranslations.Glyphs;
 using VSTranslations.Abstractions.Tagging;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace VSTranslations.Services.Tagging
 {
@@ -20,16 +21,17 @@ namespace VSTranslations.Services.Tagging
             _view = view;
             _sourceBuffer = sourceBuffer;
             _translatedLineGlyphTagsStore = translatedLineGlyphTagsStore;
+            _translatedLineGlyphTagsStore = translatedLineGlyphTagsStore;
 
             _view.Caret.PositionChanged += CaretPositionChanged;
             _view.LayoutChanged += ViewLayoutChanged;
-            // _translatedTagsPersistence.TranslatedTextChanged += TranslatedTextChanged;
-        }
 
-        //private void TranslatedTextChanged(object sender, TranslatedTextChangedEventArgs e)
-        //{
-        //    TagsChanged?.Invoke(this, new SnapshotSpanEventArgs(new SnapshotSpan(SourceBuffer.CurrentSnapshot, 0, SourceBuffer.CurrentSnapshot.Length)));
-        //}
+            translatedLineGlyphTagsStore.Subscribe((_, _) =>
+            {
+                var snapshotSpan = new SnapshotSpan(_sourceBuffer.CurrentSnapshot, 0, _sourceBuffer.CurrentSnapshot.Length);
+                TagsChanged?.Invoke(this, new SnapshotSpanEventArgs(snapshotSpan));
+            });
+        }
 
         private void ViewLayoutChanged(object sender, TextViewLayoutChangedEventArgs e)
         {
@@ -41,28 +43,22 @@ namespace VSTranslations.Services.Tagging
 
         public IEnumerable<ITagSpan<TranslatedLineGlyphTag>> GetTags(NormalizedSnapshotSpanCollection spans)
         {
-            foreach (var span in spans)
+            foreach (var overlapingTagSpan in spans.SelectMany(GetOverlapingTags))
             {
-                var overlapingTagSpan = GetOverlapingTagSpan(span);
-                if (overlapingTagSpan is not null)
-                {
-                    yield return overlapingTagSpan;
-                }
+                yield return overlapingTagSpan;
             }
         }
 
-        private ITagSpan<TranslatedLineGlyphTag> GetOverlapingTagSpan(SnapshotSpan snapshotSpan)
+        private IEnumerable<ITagSpan<TranslatedLineGlyphTag>> GetOverlapingTags(SnapshotSpan snapshotSpan)
         {
             foreach (var translatedLineGlyphTag in _translatedLineGlyphTagsStore)
             {
                 var glyphTagSpan = translatedLineGlyphTag.Span.GetSpan(snapshotSpan.Snapshot);
                 if (glyphTagSpan.OverlapsWith(snapshotSpan))
                 {
-                    return new TagSpan<TranslatedLineGlyphTag>(glyphTagSpan, translatedLineGlyphTag);
+                    yield return new TagSpan<TranslatedLineGlyphTag>(glyphTagSpan, translatedLineGlyphTag);
                 }
             }
-
-            return null;
         }
     }
 }

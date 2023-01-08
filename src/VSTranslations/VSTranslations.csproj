@@ -50,11 +50,13 @@
     <Compile Include="Abstractions\Translating\ITranslatorEngineProvider.cs" />
     <Compile Include="Abstractions\Translating\TextLine.cs" />
     <Compile Include="Abstractions\Translating\TextLinesCollection.cs" />
+    <Compile Include="Commands\DeleteTranslationCommand.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\SnapshotSpanExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TextViewExtensions.cs" />
     <Compile Include="Extensions\TranslatedLineGlyphTagsStoreExtensions.cs" />
+    <Compile Include="Extensions\ViewTagAggregatorFactoryServiceExtensions.cs" />
     <Compile Include="Extensions\WpfTextViewExtensions.cs" />
     <Compile Include="Glyphs\TranslatedLineGlyphTag.cs" />
     <Compile Include="Glyphs\TranslatedLineGlyphTagView.xaml.cs">

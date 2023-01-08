@@ -19,7 +19,7 @@ namespace VSTranslations.Extensions
         /// line where the mouse cursor position is.
         /// </remarks>
         /// <returns><see cref="SnapshotSpan"/> instance.</returns>
-        public static SnapshotSpan GetSnapshotSpanToTranslate(this IWpfTextView textView)
+        public static SnapshotSpan GetSelectedSnapshotSpan(this IWpfTextView textView)
         {
             if (textView.Selection.IsEmpty)
             {

@@ -7,6 +7,7 @@ namespace VSTranslations.Services.TextView
 {
     [Export(typeof(ITextViewCreationListener))]
     [ContentType(Constants.TextContentType)]
+    [ContentType(Constants.CodeContentType)]
     [TextViewRole(PredefinedTextViewRoles.Document)]
     internal class TranslationTagsTextViewCreationListener : ITextViewCreationListener
     {

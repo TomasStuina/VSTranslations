@@ -10,6 +10,7 @@ namespace VSTranslations.Services.Tagging
     [Name(nameof(TranslatedLineGlyphTag))]
     [Order(Before = Constants.VsTextMarker)]
     [ContentType(Constants.TextContentType)]
+    [ContentType(Constants.CodeContentType)]
     [TagType(typeof(TranslatedLineGlyphTag))]
     internal sealed class TranslatedLineGlyphFactoryProvider : IGlyphFactoryProvider
     {

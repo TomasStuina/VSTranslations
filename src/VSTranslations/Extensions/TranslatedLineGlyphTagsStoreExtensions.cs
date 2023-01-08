@@ -1,5 +1,8 @@
-﻿using VSTranslations.Abstractions.Tagging;
+﻿using System.Collections.Generic;
+using System.Linq;
+using VSTranslations.Abstractions.Tagging;
 using VSTranslations.Abstractions.Translating;
+using VSTranslations.Glyphs;
 
 namespace VSTranslations.Extensions
 {
@@ -16,6 +19,14 @@ namespace VSTranslations.Extensions
         public static void Add(this ITranslatedLineGlyphTagsStore translatedTagsPersistence, TextLine textLine)
         {
             translatedTagsPersistence.Add(textLine.LineSpan, textLine.Text);
+        }
+
+        public static void RemoveTags(this ITranslatedLineGlyphTagsStore translatedTagsPersistence, IEnumerable<TranslatedLineGlyphTag> glyphTags)
+        {
+            foreach(var glyphTag in glyphTags)
+            {
+                translatedTagsPersistence.Remove(glyphTag);
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using VSTranslations.Abstractions.Tagging;
 using VSTranslations.Glyphs;
 
@@ -8,7 +10,8 @@ namespace VSTranslations.Services.Tagging
 {
     internal class TranslatedLineGlyphTagsStore : ITranslatedLineGlyphTagsStore
     {
-        private List<TranslatedLineGlyphTag> _translatedLineGlyphTags = new List<TranslatedLineGlyphTag>();
+        private ObservableCollection<TranslatedLineGlyphTag> _translatedLineGlyphTags = new();
+        //private List<TranslatedLineGlyphTag> _translatedLineGlyphTags = new List<TranslatedLineGlyphTag>();
 
 
         public void Add(SnapshotSpan span, string text)
@@ -21,8 +24,6 @@ namespace VSTranslations.Services.Tagging
             var translatedLineGlyphTag = new TranslatedLineGlyphTag(span, text);
 
             _translatedLineGlyphTags.Add(translatedLineGlyphTag);
-
-            //TranslatedTextChanged?.Invoke(this, new TranslatedTextChangedEventArgs(translatedTextTag, null));
         }
 
         public void Remove(TranslatedLineGlyphTag tag)
@@ -33,8 +34,14 @@ namespace VSTranslations.Services.Tagging
             }
 
             _translatedLineGlyphTags.Remove(tag);
+        }
 
-            //TranslatedTextChanged?.Invoke(this, new TranslatedTextChangedEventArgs(null, translatedTextTag));
+        public void Subscribe(NotifyCollectionChangedEventHandler handler)
+        {
+            if (handler is not null)
+            {
+                _translatedLineGlyphTags.CollectionChanged += handler;
+            }
         }
 
         public IEnumerator<TranslatedLineGlyphTag> GetEnumerator()

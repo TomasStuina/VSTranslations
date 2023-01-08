@@ -29,7 +29,7 @@ namespace VSTranslations
 
         private async Task ExecuteAsync(IWpfTextView view)
         {
-            var span = view.GetSnapshotSpanToTranslate();
+            var span = view.GetSelectedSnapshotSpan();
             var translatedLines = await _translator.TranslateAsync(span);
 
             var glyphTagsStore = view.GetOrCreateTranslatedLineGlyphTagsStore();
