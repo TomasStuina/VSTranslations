@@ -5,7 +5,7 @@ namespace VsTranslations.UnitTests.AutoFixture.Attributes
     public class SnapshotSpanAutoDataAttribute : AutoDataAttributeBase
     {
         public SnapshotSpanAutoDataAttribute()
-            : base(new SnapshotSpanCustomization(), new TextSnapshotCustomization())
+            : base(new SnapshotSpanCustomization(), new TextSnapshotLineCustomization(), new TextSnapshotCustomization())
         { 
         }
     }
