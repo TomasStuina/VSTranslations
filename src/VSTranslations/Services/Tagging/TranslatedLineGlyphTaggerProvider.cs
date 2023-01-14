@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 using System.ComponentModel.Composition;
-using VSTranslations.Abstractions.Tagging;
 using VSTranslations.Extensions;
 using VSTranslations.Glyphs;
 

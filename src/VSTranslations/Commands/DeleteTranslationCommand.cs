@@ -1,8 +1,6 @@
-﻿using Microsoft.VisualStudio.Text;
-using Microsoft.VisualStudio.Text.Editor;
+﻿using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
 using System.Linq;
-using VSTranslations.Abstractions.Translating;
 using VSTranslations.Extensions;
 using VSTranslations.Glyphs;
 

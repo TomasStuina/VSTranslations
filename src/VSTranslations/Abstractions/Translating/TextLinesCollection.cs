@@ -20,7 +20,7 @@ namespace VSTranslations.Abstractions.Translating
 
             foreach (var line in _lines)
             {
-                textBuilder.Append(line.Text);
+                textBuilder.AppendLine(line.Text);
             }
 
             return textBuilder.ToString();

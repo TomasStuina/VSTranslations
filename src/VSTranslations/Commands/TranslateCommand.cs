@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.Text.Editor;
 using VSTranslations.Abstractions.Translating;
 using VSTranslations.Extensions;
-using VSTranslations.Services.Translating;
 
 namespace VSTranslations
 {

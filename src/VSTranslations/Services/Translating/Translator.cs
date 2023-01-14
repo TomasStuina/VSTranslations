@@ -34,11 +34,10 @@ namespace VSTranslations.Services.Translating
 
             foreach (var textLineToTranslate in textLinesToTranslate)
             {
-                var translatedLineText = translatedTextEnumerator.MoveNext()
-                    ? translatedTextEnumerator.Current
-                    : string.Empty;
-
-                textLineToTranslate.Text = translatedLineText;
+                if (translatedTextEnumerator.MoveNext())
+                {
+                    textLineToTranslate.Text = translatedTextEnumerator.Current;
+                }
             }
 
             return textLinesToTranslate;

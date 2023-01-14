@@ -2,7 +2,7 @@
 
 namespace VsTranslations.UnitTests.AutoFixture.Attributes
 {
-    internal class ViewTagAggregatorFactoryServiceAutoDataAttribute : AutoDataAttributeBase
+    public class ViewTagAggregatorFactoryServiceAutoDataAttribute : AutoDataAttributeBase
     {
         public ViewTagAggregatorFactoryServiceAutoDataAttribute()
             : base(new TextViewCustomization(), new ViewTagAggregatorFactoryServiceCustomization())

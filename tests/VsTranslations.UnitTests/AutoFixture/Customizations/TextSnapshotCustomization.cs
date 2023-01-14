@@ -24,6 +24,10 @@ namespace VsTranslations.UnitTests.AutoFixture.Customizations
             textSnaphot
                 .Setup(self => self.GetLineFromLineNumber(It.IsAny<int>()))
                 .Returns<int>(lineNumber => fixture.Create<ITextSnapshotLine[]>()[lineNumber - 1]);
+
+            textSnaphot
+                .Setup(self => self.GetText(It.IsAny<Span>()))
+                .ReturnsUsingFixture(fixture);
         }
     }
 }

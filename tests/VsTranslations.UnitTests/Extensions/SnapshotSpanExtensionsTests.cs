@@ -2,11 +2,12 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.Text;
 using Moq;
-using stdole;
 using System.Linq;
 using VsTranslations.UnitTests.AutoFixture.Attributes;
+using VsTranslations.UnitTests.Common.Moq.Extensions;
 using VSTranslations.Extensions;
 using Xunit;
+using MockFactory = VsTranslations.UnitTests.Moq.MockFactory;
 
 namespace VsTranslations.UnitTests.Extensions
 {
@@ -22,17 +23,15 @@ namespace VsTranslations.UnitTests.Extensions
             {
                 return new[]
                 {
-                    CreateTextSnaphotLine(currentTextSnapshot, 0, 30),
-                    CreateTextSnaphotLine(currentTextSnapshot, 30, 60),
-                    CreateTextSnaphotLine(currentTextSnapshot, 60, 90)
+                    MockFactory.MockTextSnaphotLine(currentTextSnapshot, 0, 30).Object,
+                    MockFactory.MockTextSnaphotLine(currentTextSnapshot, 30, 60).Object,
+                    MockFactory.MockTextSnaphotLine(currentTextSnapshot, 60, 90).Object
                 };
             });
 
             textSnapshot
                 .SetupSequence(self => self.GetText(It.IsAny<Span>()))
-                .Returns($"   {textLines[0]}   ")
-                .Returns($"   {textLines[1]}   ")
-                .Returns($"   {textLines[2]}   ");
+                .ReturnsMany(textLines.Select(textLine => $"   {textLine}   "));
 
             // Act
             var linesCollection = snapshotSpan.GetLinesCollection().ToList();
@@ -53,8 +52,7 @@ namespace VsTranslations.UnitTests.Extensions
             // Arrange
             textSnapshotLine
                 .SetupSequence(self => self.LineNumber)
-                .Returns(1)
-                .Returns(1);
+                .ReturnsMany(1, 1);
 
             textSnapshot
                 .Setup(self => self.GetText(It.IsAny<Span>()))
@@ -75,8 +73,7 @@ namespace VsTranslations.UnitTests.Extensions
             // Arrange
             textSnapshotLine
                 .SetupSequence(self => self.LineNumber)
-                .Returns(1)
-                .Returns(1);
+                .ReturnsMany(1, 1);
 
             // Act
             var snapshotSpans = snapshotSpan.GetLinesSnapshotSpans().ToList();
@@ -97,16 +94,15 @@ namespace VsTranslations.UnitTests.Extensions
             {
                 return new[]
                 {
-                    CreateTextSnaphotLine(currentTextSnapshot, 0, 30),
-                    CreateTextSnaphotLine(currentTextSnapshot, 30, 60),
-                    CreateTextSnaphotLine(currentTextSnapshot, 60, 90)
+                    MockFactory.MockTextSnaphotLine(currentTextSnapshot, 0, 30).Object,
+                    MockFactory.MockTextSnaphotLine(currentTextSnapshot, 30, 60).Object,
+                    MockFactory.MockTextSnaphotLine(currentTextSnapshot, 60, 90).Object
                 };
             });
 
             textSnapshotLine
                 .SetupSequence(self => self.LineNumber)
-                .Returns(1)
-                .Returns(3);
+                .ReturnsMany(1, 3);
 
             // Act
             var snapshotSpans = snapshotSpan.GetLinesSnapshotSpans().ToList();
@@ -117,16 +113,5 @@ namespace VsTranslations.UnitTests.Extensions
             snapshotSpans[1].Should().Match<SnapshotSpan>(span => span.Start == snapshotSpans[1].Start && span.End == snapshotSpans[1].End);
             snapshotSpans[2].Should().Match<SnapshotSpan>(span => span.Start == snapshotSpans[2].Start && span.End == snapshotSpan.End);
         }
-
-        #region Helper methods
-
-        private static ITextSnapshotLine CreateTextSnaphotLine(ITextSnapshot textSnapshot, int start, int end)
-        {
-            return Mock.Of<ITextSnapshotLine>(self =>
-                self.Start == new SnapshotPoint(textSnapshot, start)
-                    && self.End == new SnapshotPoint(textSnapshot, end));
-        }
-
-        #endregion
     }
 }

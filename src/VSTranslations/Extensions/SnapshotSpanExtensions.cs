@@ -44,6 +44,11 @@ namespace VSTranslations.Extensions
         /// <returns><see cref="IEnumerable{SnapshotSpan}"/> instance.</returns>
         public static IEnumerable<SnapshotSpan> GetLinesSnapshotSpans(this SnapshotSpan span)
         {
+            if (span.IsEmpty)
+            {
+                yield break;
+            }
+
             var startLineNumber = span.Start.GetContainingLine().LineNumber;
             var endLineNumber = (span.End - 1).GetContainingLine().LineNumber;
 

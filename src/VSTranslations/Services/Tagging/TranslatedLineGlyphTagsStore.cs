@@ -10,9 +10,7 @@ namespace VSTranslations.Services.Tagging
 {
     internal class TranslatedLineGlyphTagsStore : ITranslatedLineGlyphTagsStore
     {
-        private ObservableCollection<TranslatedLineGlyphTag> _translatedLineGlyphTags = new();
-        //private List<TranslatedLineGlyphTag> _translatedLineGlyphTags = new List<TranslatedLineGlyphTag>();
-
+        private readonly ObservableCollection<TranslatedLineGlyphTag> _translatedLineGlyphTags = new();
 
         public void Add(SnapshotSpan span, string text)
         {

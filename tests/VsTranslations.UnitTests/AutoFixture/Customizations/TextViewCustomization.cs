@@ -1,10 +1,8 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoMoq;
-using EnvDTE;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Utilities;
 using Moq;
-using System;
 
 namespace VsTranslations.UnitTests.AutoFixture.Customizations
 {

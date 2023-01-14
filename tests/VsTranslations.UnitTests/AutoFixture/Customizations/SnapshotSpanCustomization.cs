@@ -1,10 +1,7 @@
 ﻿using AutoFixture;
-using AutoFixture.AutoMoq;
-using Microsoft.VisualStudio.GraphModel.CodeSchema;
 using Microsoft.VisualStudio.Text;
 using Moq;
-using System;
-using System.Collections.Generic;
+using VsTranslations.UnitTests.Common.Moq.Extensions;
 
 namespace VsTranslations.UnitTests.AutoFixture.Customizations
 {
@@ -12,15 +9,11 @@ namespace VsTranslations.UnitTests.AutoFixture.Customizations
     {
         public void Customize(IFixture fixture)
         {
-            var span = new Span(0, 100);
-
-            fixture.Register(() => span);
+            fixture.Register(() => new Span(0, 100));
             fixture.Register((ITextSnapshot textSnapshot, Span span) => new SnapshotSpan(textSnapshot, span));
 
             var textSnapshotLine = fixture.Freeze<Mock<ITextSnapshotLine>>();
-            textSnapshotLine.SetupSequence(self => self.LineNumber)
-                .Returns(1)
-                .Returns(3);
+            textSnapshotLine.SetupSequence(self => self.LineNumber).ReturnsMany(1, 3);
         }
     }
 }
