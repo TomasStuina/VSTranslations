@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using VSTranslations.Abstractions.Tagging;
 using VSTranslations.Glyphs;
+using VSTranslations.Common.Extensions;
 
 namespace VSTranslations.Services.Tagging
 {
@@ -14,32 +15,19 @@ namespace VSTranslations.Services.Tagging
 
         public void Add(SnapshotSpan span, string text)
         {
-            if (text is null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
-
-            var translatedLineGlyphTag = new TranslatedLineGlyphTag(span, text);
+            var translatedLineGlyphTag = new TranslatedLineGlyphTag(span, text.ThrowIfNull(nameof(text)));
 
             _translatedLineGlyphTags.Add(translatedLineGlyphTag);
         }
 
         public void Remove(TranslatedLineGlyphTag tag)
         {
-            if (tag is null)
-            {
-                throw new ArgumentNullException(nameof(tag));
-            }
-
-            _translatedLineGlyphTags.Remove(tag);
+            _translatedLineGlyphTags.Remove(tag.ThrowIfNull(nameof(tag)));
         }
 
         public void Subscribe(NotifyCollectionChangedEventHandler handler)
         {
-            if (handler is not null)
-            {
-                _translatedLineGlyphTags.CollectionChanged += handler;
-            }
+            _translatedLineGlyphTags.CollectionChanged += handler.ThrowIfNull(nameof(handler));
         }
 
         public IEnumerator<TranslatedLineGlyphTag> GetEnumerator()

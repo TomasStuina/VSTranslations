@@ -4,9 +4,9 @@ namespace VsTranslations.UnitTests.AutoFixture.Attributes
 {
     public class TranslatorAutoDataAttribute : AutoDataAttributeBase
     {
-        public TranslatorAutoDataAttribute()
-            : base(new SnapshotSpanCustomization(), new TextSnapshotLineCustomization(),
-                   new TextSnapshotCustomization(), new TranslatorEngineCustomization())
+        public TranslatorAutoDataAttribute() : base(
+            new TextSnapshotCustomization(),
+            new TranslatorEngineCustomization())
         {
         }
     }

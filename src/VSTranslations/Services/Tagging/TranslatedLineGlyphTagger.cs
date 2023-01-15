@@ -10,9 +10,9 @@ namespace VSTranslations.Services.Tagging
 {
     internal class TranslatedLineGlyphTagger : ITagger<TranslatedLineGlyphTag>
     {
-        private ITextView _view;
-        private ITextBuffer _sourceBuffer;
-        private ITranslatedLineGlyphTagsStore _translatedLineGlyphTagsStore;
+        private readonly ITextView _view;
+        private readonly ITextBuffer _sourceBuffer;
+        private readonly ITranslatedLineGlyphTagsStore _translatedLineGlyphTagsStore;
 
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
 
@@ -20,7 +20,6 @@ namespace VSTranslations.Services.Tagging
         {
             _view = view;
             _sourceBuffer = sourceBuffer;
-            _translatedLineGlyphTagsStore = translatedLineGlyphTagsStore;
             _translatedLineGlyphTagsStore = translatedLineGlyphTagsStore;
 
             _view.Caret.PositionChanged += CaretPositionChanged;

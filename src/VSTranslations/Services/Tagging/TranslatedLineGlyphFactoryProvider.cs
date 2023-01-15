@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.Text.Editor;
+using Microsoft.VisualStudio.Text.Formatting;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 using System.ComponentModel.Composition;
+using System.Windows;
 using VSTranslations.Glyphs;
 
 namespace VSTranslations.Services.Tagging
@@ -25,5 +27,12 @@ namespace VSTranslations.Services.Tagging
             return new TranslatedLineGlyphFactory();
         }
 
+        private class TranslatedLineGlyphFactory : IGlyphFactory
+        {
+            public UIElement GenerateGlyph(IWpfTextViewLine line, IGlyphTag tag)
+            {
+                return new TranslatedLineGlyphTagView();
+            }
+        }
     }
 }

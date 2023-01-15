@@ -66,7 +66,6 @@
     <Compile Include="Resources\TranslateGlyph.xaml.cs">
       <DependentUpon>TranslateGlyph.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\Tagging\TranslatedLineGlyphFactory.cs" />
     <Compile Include="Services\Tagging\TranslatedLineGlyphFactoryProvider.cs" />
     <Compile Include="Services\Tagging\TranslatedLineGlyphTagger.cs" />
     <Compile Include="Services\Tagging\TranslatedLineGlyphTaggerProvider.cs" />

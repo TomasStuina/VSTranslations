@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Shell.15.0" Version="17.4.33103.184" />
     <PackageReference Include="Microsoft.VisualStudio.Text.Data" Version="17.4.255" />
     <PackageReference Include="Microsoft.VisualStudio.Text.UI.Wpf" Version="17.4.255" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -19,6 +20,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Xunit.StaFact" Version="1.1.11" />
   </ItemGroup>
 
   <ItemGroup>
