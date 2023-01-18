@@ -17,6 +17,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+
+
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
       with:
@@ -27,6 +29,8 @@ jobs:
       uses: nuget/setup-nuget@v1
       with:
         nuget-version: latest
+
+    - name: Restore NuGet
       run: nuget restore VSTranslations.sln
 
     - name: echo MSBuild
