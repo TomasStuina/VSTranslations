@@ -1,4 +1,4 @@
-name: VS Translations
+name: CI VS Translations
 
 on:
   workflow_dispatch:
