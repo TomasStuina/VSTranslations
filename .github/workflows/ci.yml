@@ -23,19 +23,11 @@ jobs:
         msbuild-architecture: x64
         vs-prerelease: true
 
-    - name: echo msbuild path
-      run: |
-        echo "vswhere-path: ${{ steps.setup_msbuild_explicit.outputs.msbuildPath }}"
-        echo "PATH: ${{ steps.setup_msbuild_path.outputs.msbuildPath }}"
-        echo "ARM PATH: ${{ steps.setup_msbuild_path_arm.outputs.msbuildPath }}"
-        echo "ARM PATH: ${{ steps.setup_msbuild_path_x64.outputs.msbuildPath }}"
-        echo "Fallback: ${{ steps.setup_msbuild_fallback.outputs.msbuildPath }}"
-
     - name: Setup NuGet.exe
       uses: nuget/setup-nuget@v1
       with:
         nuget-version: latest
-      - run: nuget restore VSTranslations.sln
+      run: nuget restore VSTranslations.sln
 
     - name: echo MSBuild
       run: msbuild -version
