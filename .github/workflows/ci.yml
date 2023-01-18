@@ -38,4 +38,4 @@ jobs:
 
     - name: Build Solution
       run: |
-        msbuild.exe VSTranslations.sln /p:platform="x64" /p:configuration="Release"
+        msbuild.exe VSTranslations.sln /p:Configuration=Debug /p:Platform="Any CPU"
