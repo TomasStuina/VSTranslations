@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImageManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/VisualStudio/ImageManifestSchema/2014">
+  <Symbols>
+    <String Name="Resources" Value="/VSTranslations;Component/" />
+    <Guid Name="DeleteTranslationMoniker" Value="{a1680aa0-b52d-4531-b90c-e1292a64cd8b}" />
+    <ID Name="DeleteTranslationId" Value="1" />
+  </Symbols>
+  <Images>
+    <Image Guid="$(DeleteTranslationMoniker)" ID="$(DeleteTranslationId)">
+      <Source Uri="$(Resources)/Resources/StopTranslate.xaml" />
+    </Image>
+  </Images>
+  <ImageLists />
+</ImageManifest>

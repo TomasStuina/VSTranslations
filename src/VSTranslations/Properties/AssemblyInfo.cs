@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using VSTranslations;
 
@@ -15,6 +16,7 @@ using VSTranslations;
 
 [assembly: AssemblyVersion(Vsix.Version)]
 [assembly: AssemblyFileVersion(Vsix.Version)]
+[assembly: InternalsVisibleTo("VSTranslations.UnitTests")]
 
 namespace System.Runtime.CompilerServices
 {

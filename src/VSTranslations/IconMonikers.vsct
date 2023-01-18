@@ -1,0 +1,8 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable">
+  <Symbols>
+    <GuidSymbol name="DeleteTranslationMoniker" value="{a1680aa0-b52d-4531-b90c-e1292a64cd8b}">
+      <IDSymbol name="DeleteTranslationId" value="1" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>
