@@ -17,37 +17,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup MSBuild (vswhere-path)
-      id: setup_msbuild_explicit
-      uses: ./
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
       with:
-        vswhere-path: C:\ProgramData\chocolatey\bin
-
-    - name: Setup MSBuild (PATH)
-      id: setup_msbuild_path
-      uses: ./
-
-    - name: Setup MSBuild (fallback)
-      id: setup_msbuild_fallback
-      uses: ./
-      env:
-        PATH: ''
-
-    - name: Setup MSBuild (x64)
-      if: always()
-      id: setup_msbuild_path_x64
-      uses: ./
-      with:
+        msbuild-architecture: x64
         vs-prerelease: true
-        msbuild-architecture: 'x64'
-
-    - name: Setup MSBuild (arm64)
-      if: always()
-      id: setup_msbuild_path_arm
-      uses: ./
-      with:
-        vs-prerelease: true
-        msbuild-architecture: 'arm64'
 
     - name: echo msbuild path
       run: |
