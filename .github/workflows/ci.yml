@@ -32,9 +32,9 @@ jobs:
         echo "Fallback: ${{ steps.setup_msbuild_fallback.outputs.msbuildPath }}"
 
     - name: Setup NuGet.exe
-        uses: nuget/setup-nuget@v1
-        with:
-          nuget-version: latest
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: latest
       - run: nuget restore VSTranslations.sln
 
     - name: echo MSBuild
