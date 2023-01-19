@@ -15,9 +15,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VsTranslations.UnitTests.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSTranslations.Plugin.Abstractions", "src\VSTranslations.Plugin.Abstractions\VSTranslations.Plugin.Abstractions.csproj", "{AA3A0D36-25AD-47E5-910B-2632A6569AB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSTranslations.Common", "src\VSTranslations.Common\VSTranslations.Common.csproj", "{9FBF47E3-CFCA-4C58-A33E-464C1E163022}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSTranslations.Common", "src\VSTranslations.Common\VSTranslations.Common.csproj", "{9FBF47E3-CFCA-4C58-A33E-464C1E163022}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSTranslations.Common.UnitTests", "tests\VSTranslations.Common.UnitTests\VSTranslations.Common.UnitTests.csproj", "{0BD6D213-FFD5-4C56-BAE2-02F3FC37CE09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSTranslations.Common.UnitTests", "tests\VSTranslations.Common.UnitTests\VSTranslations.Common.UnitTests.csproj", "{0BD6D213-FFD5-4C56-BAE2-02F3FC37CE09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{FFA244F0-D7B0-4130-A27D-B77539D450DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{A8AA55E1-37AA-4558-9978-A43ABEA9E1EF}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,6 +119,7 @@ Global
 		{AA3A0D36-25AD-47E5-910B-2632A6569AB5} = {3F4EF46B-61CD-45F2-89D7-F118A7F7C2C7}
 		{9FBF47E3-CFCA-4C58-A33E-464C1E163022} = {3F4EF46B-61CD-45F2-89D7-F118A7F7C2C7}
 		{0BD6D213-FFD5-4C56-BAE2-02F3FC37CE09} = {9B7066A9-DCEC-48D1-AC45-A49D6E8EAA3D}
+		{A8AA55E1-37AA-4558-9978-A43ABEA9E1EF} = {FFA244F0-D7B0-4130-A27D-B77539D450DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {13DE4F0D-2522-4000-B21C-5D1CFA1A3E07}
