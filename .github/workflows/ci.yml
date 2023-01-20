@@ -35,3 +35,7 @@ jobs:
     - name: Build Solution
       run: |
         msbuild.exe VSTranslations.sln /p:Configuration=Debug /p:Platform="Any CPU" /p:DeployExtension=false
+
+    - name: Run Tests
+      run: |
+        dotnet VSTranslations.sln --no-build --no-restore
