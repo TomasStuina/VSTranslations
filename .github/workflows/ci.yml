@@ -38,4 +38,4 @@ jobs:
 
     - name: Run Tests
       run: |
-        dotnet VSTranslations.sln --no-build --no-restore
+        dotnet test VSTranslations.sln --no-build --no-restore
