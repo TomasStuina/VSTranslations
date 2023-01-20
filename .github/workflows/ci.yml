@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - main
       - 'maintenence/*'
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
 
@@ -31,9 +31,6 @@ jobs:
 
     - name: Restore NuGet
       run: nuget restore VSTranslations.sln
-
-    - name: echo MSBuild
-      run: msbuild -version
 
     - name: Build Solution
       run: |
