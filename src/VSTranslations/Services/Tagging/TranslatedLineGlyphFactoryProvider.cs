@@ -8,11 +8,14 @@ using VSTranslations.Glyphs;
 
 namespace VSTranslations.Services.Tagging
 {
+    /// <summary>
+    /// A concrete implemention of <see cref="IGlyphFactoryProvider"/>
+    /// that can provide <see cref="TranslatedLineGlyphFactory"/>.
+    /// </summary>
     [Export(typeof(IGlyphFactoryProvider))]
     [Name(nameof(TranslatedLineGlyphTag))]
     [Order(Before = Constants.VsTextMarker)]
-    [ContentType(Constants.TextContentType)]
-    [ContentType(Constants.CodeContentType)]
+    [ContentType(ContentTypes.Text)]
     [TagType(typeof(TranslatedLineGlyphTag))]
     internal sealed class TranslatedLineGlyphFactoryProvider : IGlyphFactoryProvider
     {

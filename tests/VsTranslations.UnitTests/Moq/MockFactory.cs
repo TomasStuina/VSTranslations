@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.Text;
 using Moq;
 
-namespace VsTranslations.UnitTests.Moq
+namespace VSTranslations.UnitTests.Moq
 {
     internal static class MockFactory
     {

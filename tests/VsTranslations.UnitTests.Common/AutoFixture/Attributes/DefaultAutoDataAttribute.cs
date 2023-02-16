@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using System;
 
-namespace VsTranslations.UnitTests.AutoFixture.Attributes;
+namespace VSTranslations.UnitTests.AutoFixture.Attributes;
 
 public class DefaultAutoDataAttribute : AutoDataAttributeBase
 {

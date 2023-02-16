@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using VsTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.UnitTests.AutoFixture.Attributes;
 using VSTranslations.Common.Extensions;
 
-namespace VsTranslations.Common.UnitTests.Extensions
+namespace VSTranslations.Common.UnitTests.Extensions
 {
     public class StringExtensionsTests
     {

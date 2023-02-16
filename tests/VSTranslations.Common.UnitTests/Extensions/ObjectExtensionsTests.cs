@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using VsTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.UnitTests.AutoFixture.Attributes;
 using VSTranslations.Common.Extensions;
 
 namespace VSTranslations.Common.UnitTests.Extensions

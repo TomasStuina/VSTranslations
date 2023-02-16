@@ -5,15 +5,15 @@ using Moq;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using VsTranslations.UnitTests.AutoFixture.Attributes;
-using VsTranslations.UnitTests.Common.Moq.Extensions;
+using VSTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.UnitTests.Common.Moq.Extensions;
 using VSTranslations.Abstractions.Translating;
 using VSTranslations.Plugin.Abstractions.Translating;
 using VSTranslations.Services.Translating;
 using Xunit;
-using MockFactory = VsTranslations.UnitTests.Moq.MockFactory;
+using MockFactory = VSTranslations.UnitTests.Moq.MockFactory;
 
-namespace VsTranslations.UnitTests.Services.Translating
+namespace VSTranslations.UnitTests.Services.Translating
 {
     public class TranslatorTests
     {

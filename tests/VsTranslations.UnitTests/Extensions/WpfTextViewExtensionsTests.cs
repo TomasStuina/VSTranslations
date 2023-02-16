@@ -3,11 +3,14 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Moq;
 using System;
-using VsTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.Adornments;
 using VSTranslations.Extensions;
+using VSTranslations.Services.Adornments;
+using VSTranslations.Services.TextView;
 using Xunit;
 
-namespace VsTranslations.UnitTests.Extensions
+namespace VSTranslations.UnitTests.Extensions
 {
     public class WpfTextViewExtensionsTests
     {
@@ -45,6 +48,58 @@ namespace VsTranslations.UnitTests.Extensions
             textView.Object.GetSelectedSnapshotSpan()
                 .Should().Match<SnapshotSpan>(selectedSpan => selectedSpan.Start == snapshotSpan.Start
                     && selectedSpan.End == snapshotSpan.End);
+        }
+
+        [Fact]
+        public void GetOrCreateAdornmentCache_WhenWpfTextViewIsNull_ShouldThrowArgumentNullException()
+        {
+            // Act & Assert
+            FluentActions.Invoking(() => WpfTextViewExtensions.GetOrCreateAdornmentCache<TranslatedTextAdornment>(null))
+                .Should().Throw<ArgumentNullException>();
+        }
+
+        [Theory]
+        [WpfTextViewAutoData]
+        public void GetOrCreateAdornmentCache_WhenWpfTextViewNotNull_ShouldReturnInMemoryAdornmentCache(IWpfTextView wpfTextView)
+        {
+            // Act & Assert
+            wpfTextView.GetOrCreateAdornmentCache<TranslatedTextAdornment>()
+                .Should().BeOfType<InMemoryAdornmentCache<TranslatedTextAdornment>>();
+        }
+
+        [Theory]
+        [WpfTextViewAutoData]
+        public void GetOrCreateAdornmentCache_WhenInvokedMoreThanOnce_ShouldReturnSameInstance(IWpfTextView wpfTextView)
+        {
+            // Act & Assert
+            wpfTextView.GetOrCreateAdornmentCache<TranslatedTextAdornment>()
+                .Should().BeSameAs(wpfTextView.GetOrCreateAdornmentCache<TranslatedTextAdornment>());
+        }
+
+        [Fact]
+        public void GetOrCreateSnapshotSpansInvalidator_WhenWpfTextViewIsNull_ShouldThrowArgumentNullException()
+        {
+            // Act & Assert
+            FluentActions.Invoking(() => WpfTextViewExtensions.GetOrCreateSnapshotSpansInvalidator(null))
+                .Should().Throw<ArgumentNullException>();
+        }
+
+        [Theory]
+        [WpfTextViewAutoData]
+        public void GetOrCreateSnapshotSpansInvalidator_WhenWpfTextViewNotNull_ShouldReturnSnapshotSpansInvalidator(IWpfTextView wpfTextView)
+        {
+            // Act & Assert
+            wpfTextView.GetOrCreateSnapshotSpansInvalidator()
+                .Should().BeOfType<SnapshotSpansInvalidator>();
+        }
+
+        [Theory]
+        [WpfTextViewAutoData]
+        public void GetOrCreateSnapshotSpansInvalidator_WhenInvokedMoreThanOnce_ShouldReturnSameInstance(IWpfTextView wpfTextView)
+        {
+            // Act & Assert
+            wpfTextView.GetOrCreateSnapshotSpansInvalidator()
+                .Should().BeSameAs(wpfTextView.GetOrCreateSnapshotSpansInvalidator());
         }
     }
 }

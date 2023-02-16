@@ -3,13 +3,13 @@ using FluentAssertions;
 using Microsoft.VisualStudio.Text;
 using Moq;
 using System.Linq;
-using VsTranslations.UnitTests.AutoFixture.Attributes;
-using VsTranslations.UnitTests.Common.Moq.Extensions;
+using VSTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.UnitTests.Common.Moq.Extensions;
 using VSTranslations.Extensions;
 using Xunit;
-using MockFactory = VsTranslations.UnitTests.Moq.MockFactory;
+using MockFactory = VSTranslations.UnitTests.Moq.MockFactory;
 
-namespace VsTranslations.UnitTests.Extensions
+namespace VSTranslations.UnitTests.Extensions
 {
     public class SnapshotSpanExtensionsTests
     {

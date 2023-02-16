@@ -3,12 +3,12 @@ using FluentAssertions;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
-using VsTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.UnitTests.AutoFixture.Attributes;
 using VSTranslations.Glyphs;
 using VSTranslations.Services.Tagging;
 using Xunit;
 
-namespace VsTranslations.UnitTests.Services.Tagging
+namespace VSTranslations.UnitTests.Services.Tagging
 {
     public class TranslatedLineGlyphTaggerProviderTests
     {

@@ -45,19 +45,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\Settings\IEditorSettings.cs" />
+    <Compile Include="Abstractions\Settings\IEditorSettingsFactory.cs" />
     <Compile Include="Abstractions\Tagging\ITranslatedLineGlyphTagsStore.cs" />
     <Compile Include="Abstractions\Translating\ITranslator.cs" />
     <Compile Include="Abstractions\Translating\ITranslatorEngineProvider.cs" />
     <Compile Include="Abstractions\Translating\TextLine.cs" />
     <Compile Include="Abstractions\Translating\TextLinesCollection.cs" />
+    <Compile Include="Abstractions\Adornments\IAdornmentCache.cs" />
+    <Compile Include="Abstractions\TextView\ISnapshotSpansInvalidator.cs" />
+    <Compile Include="Adornments\TranslatedTextAdornment.xaml.cs">
+      <DependentUpon>TranslatedTextAdornment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Commands\DeleteTranslationCommand.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Delegates\SpanTranslateDelegate.cs" />
+    <Compile Include="Extensions\EditorSettingsExtensions.cs" />
+    <Compile Include="Extensions\FontSizeConverterExtensions.cs" />
     <Compile Include="Extensions\SnapshotSpanExtensions.cs" />
+    <Compile Include="Extensions\TagAggregatorExtensions.cs" />
     <Compile Include="Extensions\TextViewExtensions.cs" />
     <Compile Include="Extensions\TranslatedLineGlyphTagsStoreExtensions.cs" />
     <Compile Include="Extensions\ViewTagAggregatorFactoryServiceExtensions.cs" />
     <Compile Include="Extensions\WpfTextViewExtensions.cs" />
     <Compile Include="Glyphs\TranslatedLineGlyphTag.cs" />
+    <Compile Include="Glyphs\TranslatedLineGlyphTagComparer.cs" />
     <Compile Include="Glyphs\TranslatedLineGlyphTagView.xaml.cs">
       <DependentUpon>TranslatedLineGlyphTagView.xaml</DependentUpon>
     </Compile>
@@ -66,11 +78,17 @@
     <Compile Include="Resources\TranslateGlyph.xaml.cs">
       <DependentUpon>TranslateGlyph.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\Adornments\TranslatedTextAdornmentTagger.cs" />
+    <Compile Include="Services\Adornments\TranslatedTextAdornmentTaggerProvider.cs" />
+    <Compile Include="Services\Adornments\InMemoryAdornmentCache.cs" />
+    <Compile Include="Services\Settings\EditorSettings.cs" />
+    <Compile Include="Services\Settings\EditorSettingsFactory.cs" />
     <Compile Include="Services\Tagging\TranslatedLineGlyphFactoryProvider.cs" />
     <Compile Include="Services\Tagging\TranslatedLineGlyphTagger.cs" />
     <Compile Include="Services\Tagging\TranslatedLineGlyphTaggerProvider.cs" />
     <Compile Include="Services\Tagging\TranslatedLineGlyphTagsStore.cs" />
     <Compile Include="Services\TextView\TranslationTagsTextViewCreationListener.cs" />
+    <Compile Include="Services\TextView\SnapshotSpansInvalidator.cs" />
     <Compile Include="Services\Translating\Translator.cs" />
     <Compile Include="Services\Translating\TranslatorEngineProvider.cs" />
     <Compile Include="VSTranslationsPackage.cs" />
@@ -131,6 +149,10 @@
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.0.5232" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Adornments\TranslatedTextAdornment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Glyphs\TranslatedLineGlyphTagView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,9 +166,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Adornment\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\VSTranslations.Common\VSTranslations.Common.csproj">
       <Project>{9fbf47e3-cfca-4c58-a33e-464c1e163022}</Project>

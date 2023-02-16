@@ -1,13 +1,13 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.Text.Editor;
 using System;
-using VsTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.UnitTests.AutoFixture.Attributes;
 using VSTranslations.Extensions;
 using VSTranslations.Services.Tagging;
 using Xunit;
 using TextViewExtensions = VSTranslations.Extensions.TextViewExtensions;
 
-namespace VsTranslations.UnitTests.Extensions
+namespace VSTranslations.UnitTests.Extensions
 {
     public class TextViewExtensionsTests
     {

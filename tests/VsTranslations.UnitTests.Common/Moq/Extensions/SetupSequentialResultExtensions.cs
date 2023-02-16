@@ -1,7 +1,7 @@
 ﻿using Moq.Language;
 using System.Collections.Generic;
 
-namespace VsTranslations.UnitTests.Common.Moq.Extensions
+namespace VSTranslations.UnitTests.Common.Moq.Extensions
 {
     public static class SetupSequentialResultExtensions
     {

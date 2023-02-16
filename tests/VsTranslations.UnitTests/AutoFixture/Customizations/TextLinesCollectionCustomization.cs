@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using VSTranslations.Abstractions.Translating;
 
-namespace VsTranslations.UnitTests.AutoFixture.Customizations
+namespace VSTranslations.UnitTests.AutoFixture.Customizations
 {
     public class TextLinesCollectionCustomization : ICustomization
     {

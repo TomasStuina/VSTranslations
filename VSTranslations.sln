@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9B7066A9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSTranslations", "src\VSTranslations\VSTranslations.csproj", "{9DE75C64-EF1D-4427-BD62-5E8FDCB8C0CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VsTranslations.UnitTests", "tests\VsTranslations.UnitTests\VsTranslations.UnitTests.csproj", "{64F6423F-F636-4D9E-8B62-F28AADB6D94E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSTranslations.UnitTests", "tests\VsTranslations.UnitTests\VSTranslations.UnitTests.csproj", "{64F6423F-F636-4D9E-8B62-F28AADB6D94E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VsTranslations.UnitTests.Common", "tests\VsTranslations.UnitTests.Common\VsTranslations.UnitTests.Common.csproj", "{A19F908C-05FD-4053-AFAC-A4E7C0D69F68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSTranslations.UnitTests.Common", "tests\VsTranslations.UnitTests.Common\VSTranslations.UnitTests.Common.csproj", "{A19F908C-05FD-4053-AFAC-A4E7C0D69F68}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSTranslations.Plugin.Abstractions", "src\VSTranslations.Plugin.Abstractions\VSTranslations.Plugin.Abstractions.csproj", "{AA3A0D36-25AD-47E5-910B-2632A6569AB5}"
 EndProject

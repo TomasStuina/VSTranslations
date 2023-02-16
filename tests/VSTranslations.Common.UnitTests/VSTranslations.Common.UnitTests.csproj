@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\VSTranslations.Common\VSTranslations.Common.csproj" />
-    <ProjectReference Include="..\VsTranslations.UnitTests.Common\VsTranslations.UnitTests.Common.csproj" />
+    <ProjectReference Include="..\VsTranslations.UnitTests.Common\VSTranslations.UnitTests.Common.csproj" />
   </ItemGroup>
 
 </Project>
