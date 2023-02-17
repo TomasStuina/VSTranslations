@@ -38,4 +38,5 @@ jobs:
 
     - name: Run Tests
       run: |
-        dotnet test VSTranslations.sln --no-build --no-restore --verbosity normal --logger trx --results-directory coverage --parallel none
+        dotnet test VSTranslations.sln --no-build --no-restore --verbosity normal --logger trx --results-directory coverage --configuration xunit.runner.json
+
