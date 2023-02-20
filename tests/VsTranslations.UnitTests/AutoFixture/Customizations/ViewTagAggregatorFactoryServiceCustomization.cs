@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 using Moq;
 using VSTranslations.Glyphs;
 
-namespace VsTranslations.UnitTests.AutoFixture.Customizations
+namespace VSTranslations.UnitTests.AutoFixture.Customizations
 {
     public class ViewTagAggregatorFactoryServiceCustomization : ICustomization
     {

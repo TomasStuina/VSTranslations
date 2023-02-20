@@ -1,14 +1,14 @@
 ﻿using AutoFixture;
 using System.Collections.Generic;
 using System;
-using VsTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.UnitTests.AutoFixture.Attributes;
 using VSTranslations.Plugin.Abstractions.Translating;
 using VSTranslations.Services.Translating;
 using Xunit;
 using FluentAssertions;
 using System.Linq;
 
-namespace VsTranslations.UnitTests.Services.Translating
+namespace VSTranslations.UnitTests.Services.Translating
 {
     public class TranslatorEngineProviderTests
     {

@@ -6,7 +6,7 @@ using VSTranslations.Abstractions.Tagging;
 using VSTranslations.Glyphs;
 using VSTranslations.Services.Tagging;
 
-namespace VsTranslations.UnitTests.AutoFixture.Customizations
+namespace VSTranslations.UnitTests.AutoFixture.Customizations
 {
     public class TranslatedLineGlyphTagsStoreCustomization : ICustomization
     {

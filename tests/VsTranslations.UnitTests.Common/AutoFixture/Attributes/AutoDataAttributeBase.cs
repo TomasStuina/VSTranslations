@@ -3,7 +3,7 @@ using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 using System.Collections.Generic;
 
-namespace VsTranslations.UnitTests.AutoFixture.Attributes;
+namespace VSTranslations.UnitTests.AutoFixture.Attributes;
 
 public class AutoDataAttributeBase : AutoDataAttribute
 {

@@ -3,14 +3,14 @@ using Microsoft.VisualStudio.Text;
 using Moq;
 using System;
 using System.Collections.Generic;
-using VsTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.UnitTests.AutoFixture.Attributes;
 using VSTranslations.Abstractions.Tagging;
 using VSTranslations.Abstractions.Translating;
 using VSTranslations.Extensions;
 using VSTranslations.Glyphs;
 using Xunit;
 
-namespace VsTranslations.UnitTests.Extensions
+namespace VSTranslations.UnitTests.Extensions
 {
     public class TranslatedLineGlyphTagsStoreExtensionsTests
     {

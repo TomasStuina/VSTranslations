@@ -1,6 +1,6 @@
 ﻿using AutoFixture.Xunit2;
 
-namespace VsTranslations.UnitTests.AutoFixture.Attributes
+namespace VSTranslations.UnitTests.AutoFixture.Attributes
 {
     public class SnapshotSpanInlineAutoDataAttribute : InlineAutoDataAttribute
     {

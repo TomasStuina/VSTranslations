@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using VSTranslations.Abstractions.Translating;
 using VSTranslations.Plugin.Abstractions.Translating;
 
-namespace VsTranslations.UnitTests.AutoFixture.Customizations
+namespace VSTranslations.UnitTests.AutoFixture.Customizations
 {
     public class TranslatorEngineCustomization : ICustomization
     {

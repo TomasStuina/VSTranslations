@@ -2,12 +2,12 @@
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
 using System;
-using VsTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.UnitTests.AutoFixture.Attributes;
 using VSTranslations.Extensions;
 using VSTranslations.Glyphs;
 using Xunit;
 
-namespace VsTranslations.UnitTests.Extensions
+namespace VSTranslations.UnitTests.Extensions
 {
     public class ViewTagAggregatorFactoryServiceExtensionsTests
     {

@@ -7,13 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using VsTranslations.UnitTests.AutoFixture.Attributes;
+using VSTranslations.UnitTests.AutoFixture.Attributes;
 using VSTranslations.Abstractions.Tagging;
 using VSTranslations.Glyphs;
 using VSTranslations.Services.Tagging;
 using Xunit;
 
-namespace VsTranslations.UnitTests.Services.Tagging
+namespace VSTranslations.UnitTests.Services.Tagging
 {
     public class TranslatedLineGlyphTaggerTests
     {
