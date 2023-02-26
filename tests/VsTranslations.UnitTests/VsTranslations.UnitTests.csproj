@@ -6,6 +6,7 @@
     <IsPackable>false</IsPackable>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <NoWarn>VSTHRD200,VSTHRD010</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

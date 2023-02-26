@@ -5,6 +5,7 @@ using VSTranslations.Abstractions.Adornments;
 using VSTranslations.Services.Adornments;
 using VSTranslations.Abstractions.TextView;
 using VSTranslations.Services.TextView;
+using Microsoft.VisualStudio.Imaging;
 
 namespace VSTranslations.Extensions
 {
@@ -70,6 +71,25 @@ namespace VSTranslations.Extensions
             {
                 return new SnapshotSpansInvalidator();
             });
+        }
+
+        /// <summary>
+        /// Shows error message in the info bar of the <paramref name="textView"/>.
+        /// </summary>
+        /// <param name="textView">Text view show info bar in.</param>
+        /// <param name="message">Message to show.</param>
+        /// <returns><see cref="Task"/> inidcating the completion.</returns>
+        public static async Task ShowInfoBarErrorAsync(this IWpfTextView textView, string message)
+        {
+            textView.ThrowIfNull(nameof(textView));
+
+            var inforBar = await textView.CreateInfoBarAsync(new InfoBarModel(new[] { new InfoBarTextSpan(message) },
+                KnownMonikers.ApplicationError, isCloseButtonVisible: true));
+
+            if (inforBar is not null)
+            {
+                await inforBar.TryShowInfoBarUIAsync();
+            }
         }
     }
 }

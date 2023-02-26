@@ -9,11 +9,19 @@ using VSTranslations.Extensions;
 using VSTranslations.Services.Adornments;
 using VSTranslations.Services.TextView;
 using Xunit;
+using VSTranslations.UnitTests.Xunit;
+using Microsoft.VisualStudio.Sdk.TestFramework;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace VSTranslations.UnitTests.Extensions
 {
-    public class WpfTextViewExtensionsTests
+    public class WpfTextViewExtensionsTests : VsTestBase
     {
+        public WpfTextViewExtensionsTests(GlobalServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         [Fact]
         public void GetSelectedSnapshotSpan_WhenWpfTextViewIsNull_ShouldThrowArgumentNullException()
         {
@@ -100,6 +108,30 @@ namespace VSTranslations.UnitTests.Extensions
             // Act & Assert
             wpfTextView.GetOrCreateSnapshotSpansInvalidator()
                 .Should().BeSameAs(wpfTextView.GetOrCreateSnapshotSpansInvalidator());
+        }
+
+        [Theory]
+        [WpfTextViewAutoData]
+        public async Task ShowInfoBarErrorAsync_WhenWpfTextViewIsNull_ShouldThrowArgumentNullException(string message)
+        {
+            await FluentActions.Invoking(() => WpfTextViewExtensions.ShowInfoBarErrorAsync(null, message))
+                .Should().ThrowAsync<ArgumentNullException>();
+        }
+
+        [Theory]
+        [WpfTextViewAutoData]
+        public async Task ShowInfoBarErrorAsync_WhenWpfTextViewIsNotNull_ShouldTryToCreateInfoBarWithMessage(IWpfTextView wpfTextView,
+            IVsUIShell uiShell, Mock<IVsInfoBarUIFactory> infoBarUIFactory, string message)
+        {
+            ServiceProvider.AddService(typeof(SVsInfoBarUIFactory), infoBarUIFactory.Object);
+            ServiceProvider.AddService(typeof(SVsUIShell), uiShell);
+
+            await wpfTextView.ShowInfoBarErrorAsync(message);
+
+            infoBarUIFactory
+                .Verify(self => self.CreateInfoBar(
+                    It.Is<IVsInfoBar>(infoBar => infoBar.TextSpans.GetSpan(0).Text == message)),
+                        Times.Once);
         }
     }
 }

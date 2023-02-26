@@ -9,6 +9,9 @@ namespace VSTranslations.UnitTests.Xunit
         protected VsTestBase(GlobalServiceProvider serviceProvider)
         {
             serviceProvider.Reset();
+            ServiceProvider = serviceProvider;
         }
+
+        protected GlobalServiceProvider ServiceProvider { get; }
     }
 }
