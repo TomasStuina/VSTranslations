@@ -22,7 +22,7 @@ namespace VSTranslations.UnitTests.Extensions
         [DefaultAutoData]
         public async Task WriteToOutputAsync_WhenWindowsNull_ShouldThrowArgumentNullException(string name, string messages)
         {
-            // Act & Asser
+            // Act & Assert
             await FluentActions.Invoking(() => WindowsExtensions.WriteToOutputAsync(null, name, messages))
                 .Should().ThrowAsync<ArgumentNullException>();
         }
@@ -32,10 +32,13 @@ namespace VSTranslations.UnitTests.Extensions
         public async Task WriteToOutputAsync_WhenMessageProvided_ShouldWriteMessageToOutputWindow(string name, string message,
             Mock<IVsOutputWindow> outputWindow, Mock<IVsOutputWindowPaneNoPump> outputWindowPaneNoPumpMock)
         {
+            // Arrange
             ServiceProvider.AddService(typeof(SVsOutputWindow), outputWindow.Object);
 
+            // Act
             await VS.Windows.WriteToOutputAsync(name, message);
 
+            // Assert
             outputWindowPaneNoPumpMock
                 .Verify(self => self.OutputStringNoPump(message + Environment.NewLine), Times.Once);
         }
