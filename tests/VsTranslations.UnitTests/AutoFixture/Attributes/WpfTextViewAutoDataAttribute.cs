@@ -6,7 +6,8 @@ namespace VSTranslations.UnitTests.AutoFixture.Attributes
     {
         public WpfTextViewAutoDataAttribute() : base(
             new TextSnapshotCustomization(),
-            new WpfTextViewCustomization())
+            new WpfTextViewCustomization(),
+            new VsUIShellCustomization())
         {
         }
     }

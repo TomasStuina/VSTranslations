@@ -25,8 +25,8 @@ namespace VSTranslations.UnitTests.Services.Translating
         {
             // Arrange
             translatorEngineProvider
-                .Setup(self => self.Get())
-                .Returns<ITranslatorEngine>(null);
+                .Setup(self => self.GetAsync())
+                .ReturnsAsync((ITranslatorEngine)null);
 
             textSnapshot
                 .SetupSequence(self => self.GetText(It.IsAny<Span>()))

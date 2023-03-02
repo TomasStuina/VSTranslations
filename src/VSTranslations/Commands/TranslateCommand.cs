@@ -28,11 +28,29 @@ namespace VSTranslations
 
         private async Task ExecuteAsync(IWpfTextView view)
         {
-            var span = view.GetSelectedSnapshotSpan();
-            var translatedLines = await _translator.TranslateAsync(span);
+            try
+            {
+                await VS.StatusBar.StartAnimationAsync(StatusAnimation.Sync);
+                await VS.StatusBar.ShowMessageAsync("Translating...");
 
-            var glyphTagsStore = view.GetOrCreateTranslatedLineGlyphTagsStore();
-            glyphTagsStore.Add(translatedLines);
+                var span = view.GetSelectedSnapshotSpan();
+                var translatedLines = await _translator.TranslateAsync(span);
+
+                var glyphTagsStore = view.GetOrCreateTranslatedLineGlyphTagsStore();
+                glyphTagsStore.Add(translatedLines);
+
+                await VS.StatusBar.ShowMessageAsync("Translated");
+            }
+            catch(Exception ex)
+            {
+                await VS.StatusBar.ClearAsync();
+                await VS.Windows.WriteToOutputAsync(Vsix.Name, ex.Message);
+                await view.ShowInfoBarErrorAsync("Error occurred while trying to translate.");
+            }
+            finally
+            {
+                await VS.StatusBar.EndAnimationAsync(StatusAnimation.Sync);
+            }
         }
     }
 }
