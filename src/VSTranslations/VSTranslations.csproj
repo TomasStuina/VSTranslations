@@ -60,6 +60,11 @@
       <DependentUpon>TranslatedTextAdornment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\DeleteTranslationCommand.cs" />
+    <Compile Include="Commands\DynamicItemsCommandBase.cs" />
+    <Compile Include="Commands\DynamicListCommandBase.cs" />
+    <Compile Include="Commands\DynamicSelectCommandBase.cs" />
+    <Compile Include="Commands\SelectSourceLanguageCommand.cs" />
+    <Compile Include="Commands\SelectTargetLanguageCommand.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Delegates\SpanTranslateDelegate.cs" />
     <Compile Include="Extensions\EditorSettingsExtensions.cs" />
@@ -102,6 +107,7 @@
     <Compile Include="Services\TextView\SnapshotSpansInvalidator.cs" />
     <Compile Include="Services\Translating\Translator.cs" />
     <Compile Include="Services\Translating\TranslatorEngineProvider.cs" />
+    <Compile Include="Services\Translating\TranslatorEngineConfigManager.cs" />
     <Compile Include="VSTranslationsPackage.cs" />
     <Compile Include="source.extension.cs">
       <AutoGen>True</AutoGen>

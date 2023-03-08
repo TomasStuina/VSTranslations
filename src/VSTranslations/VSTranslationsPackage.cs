@@ -17,6 +17,7 @@ namespace VSTranslations
     {
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
+            this.RegisterToolWindows();
             await this.RegisterCommandsAsync();
         }
     }
