@@ -16,6 +16,8 @@ jobs:
     # runs-on: windows-latest
     runs-on: self-hosted
     steps:
+    - name: Support longpaths
+      run: git config --system core.longpaths true
     - uses: actions/checkout@v2
 
     - name: Add msbuild to PATH
