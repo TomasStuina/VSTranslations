@@ -22,6 +22,22 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
+    - uses: paulhatch/semantic-version@v5.0.2
+      with:
+        tag_prefix: "v"
+        major_pattern: "(MAJOR)"
+        major_regexp_flags: ""
+        minor_pattern: "(MINOR)"
+        minor_regexp_flags: ""
+        version_format: "${major}.${minor}.${patch}-prerelease${increment}"
+        change_path: "src/my-service"
+        namespace: my-service
+        # If this is set to true, *every* commit will be treated as a new version.
+        bump_each_commit: false
+        search_commit_body: false
+        user_format_type: "csv"
+        enable_prerelease_mode: true
+
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
       with:
