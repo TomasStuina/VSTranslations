@@ -53,3 +53,10 @@ jobs:
     - name: Run Tests
       run: |
         dotnet test VSTranslations.sln --no-build --no-restore --verbosity normal --logger trx --results-directory coverage /p:Configuration=Debug /p:Platform="Any CPU"
+
+    - name: Publish Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: VSTranslations
+        path: |
+          src/**/*.vsix
