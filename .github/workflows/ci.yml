@@ -30,13 +30,12 @@ jobs:
         minor_pattern: "(MINOR)"
         minor_regexp_flags: ""
         version_format: "${major}.${minor}.${patch}-prerelease${increment}"
-        change_path: "src/my-service"
-        namespace: my-service
+        change_path: "src"
+        namespace: vstranslations
         # If this is set to true, *every* commit will be treated as a new version.
         bump_each_commit: false
         search_commit_body: false
         user_format_type: "csv"
-        enable_prerelease_mode: true
 
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
