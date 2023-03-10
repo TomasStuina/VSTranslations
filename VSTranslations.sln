@@ -30,6 +30,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSTranslations.Plugin.Googl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSTranslations.Plugin.GoogleTranslate", "src\VSTranslations.Plugin.GoogleTranslate\VSTranslations.Plugin.GoogleTranslate.csproj", "{2341322E-67D3-4555-88DD-5433FB783222}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{69EEB436-F8FA-43FB-9EB5-4B6D8D2E6AA4}"
+	ProjectSection(SolutionItems) = preProject
+		GitVersion.yml = GitVersion.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
