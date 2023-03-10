@@ -23,7 +23,7 @@ jobs:
       uses: actions/checkout@v1
 
     - name: GitTools
-      uses: GitTools/actions@v0.9.15
+      uses: gittools/actions/gitversion/setup@v0.9.15
 
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
