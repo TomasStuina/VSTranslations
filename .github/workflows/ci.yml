@@ -57,6 +57,6 @@ jobs:
     - name: Publish Artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: VSTranslations${{ env.GITVERSION_SEMVER} }
+        name: VSTranslations${{ env.GITVERSION_SEMVER }}
         path: |
           src/**/*.vsix
