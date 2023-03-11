@@ -10,8 +10,7 @@ env:
    Configuration: Release
 
 jobs:
-
- build:
+  build:
     # runs-on: windows-latest
     runs-on: self-hosted
     steps:
@@ -76,3 +75,21 @@ jobs:
         name: VSTranslations.${{ env.GITVERSION_SEMVER }}
         path: |
           src/**/*.vsix
+
+  release:
+      needs: build  
+      runs-on: self-hosted
+      steps:
+      - name: Support longpaths
+        run: git config --system core.longpaths true
+      - name: Checkout repository
+        uses: actions/checkout@v2   
+      - name: Generate release note
+        run: |
+          git fetch --prune --unshallow
+          $commitLog = git log "$(git describe --tags --abbrev=0)..HEAD" --pretty=format:"- %s"
+          "What's new: `r`n`r`n$([string]::Join("`r`n",$commitLog))" | Out-File release_note.md -Encoding utf8
+      - uses: actions/download-artifact@v3
+        with:
+          name: VSTranslations.${{ env.GITVERSION_SEMVER }}
+          path: dist/
