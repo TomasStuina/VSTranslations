@@ -44,9 +44,9 @@ jobs:
         $dirPath = 'src'
         $manifestFiles = Get-ChildItem -Path $dirPath -Filter source.extension.vsixmanifest -Recurse
         foreach ($manifestPath in $manifestFiles) {
-          $manifestXml = [xml](Get-Content $manifestPath -Raw)
+          $manifestXml = [xml](Get-Content $manifestPath.FullName -Raw)
           $manifestXml.PackageManifest.Metadata.Identity.Version = $env:GitVersion_AssemblySemVer
-          $manifestXml.Save($manifestPath)
+          $manifestXml.Save($manifestPath.FullName)
         }
 
     - name: Add msbuild to PATH
