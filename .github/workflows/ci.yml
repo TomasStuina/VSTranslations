@@ -11,9 +11,8 @@ env:
 
 jobs:
   build:
-    # runs-on: windows-latest
     uses: ./.github/workflows/build.yml
     with:
-      config-path: .github/labeler.yml
+      configuration: Debug
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
