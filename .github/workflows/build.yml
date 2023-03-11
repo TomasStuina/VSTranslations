@@ -77,7 +77,14 @@ jobs:
 
     - name: Run Tests
       run: |
-        dotnet test VSTranslations.sln --no-build --no-restore --verbosity normal --logger trx --results-directory coverage /p:Configuration=$env:Configuration /p:Platform="Any CPU"
+        dotnet test VSTranslations.sln --no-build --no-restore --verbosity normal --collect:"XPlat Code Coverage" /p:Configuration=$env:Configuration /p:Platform="Any CPU"
+
+    - name: Coverage Report
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.1.19
+      with:
+        reports: tests\**\coverage.cobertura.xml
+        targetdir: coveragereport
+        reporttypes: Html;Badges
 
     - name: Create Artifacts directory
       run: |
