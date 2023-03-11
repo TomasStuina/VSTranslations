@@ -19,7 +19,7 @@ jobs:
  
   release:
     needs: build
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/release.yml
     with:
       configuration: Release
       semVer: ${{ needs.build.outputs.semVer }}
