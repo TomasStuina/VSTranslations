@@ -96,9 +96,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.Version }}
-          release_name:  ${{ env.Version }}
-          body_path: release_note.md
+          tag_name: ${{ env.GitVersion_AssemblySemVer }}
+          release_name:  ${{ env.GitVersion_AssemblySemVer }}
+          #body_path: release_note.md
           draft: false
           prerelease: false
 
