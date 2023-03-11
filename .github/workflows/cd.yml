@@ -124,7 +124,7 @@ jobs:
           name: VSTranslations.${{ env.SEMVER }}
           path: dist/
 
-      - name: Upload Release VSIX Asset
+      - name: Upload Release VSTranslations VSIX Asset
         uses: actions/upload-release-asset@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -132,4 +132,14 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: 'dist/VSTranslations.vsix'
           asset_name: VSTranslations.vsix
+          asset_content_type: binary/octet-stream
+
+      - name: Upload Release VSTranslations Google Plugin VSIX Asset
+        uses: actions/upload-release-asset@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: 'dist/VSTranslations.Plugin.GoogleTranslate.vsix'
+          asset_name: VSTranslations.Plugin.GoogleTranslate.vsix
           asset_content_type: binary/octet-stream
