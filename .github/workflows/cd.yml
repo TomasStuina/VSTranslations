@@ -77,8 +77,10 @@ jobs:
           src/**/*.vsix
 
   release:
-      needs: build  
+      needs: build
       runs-on: self-hosted
+      env:
+        SEMVER: ${{ needs.build.outputs.semVer }}
       steps:
       - name: Support longpaths
         run: git config --system core.longpaths true
@@ -92,7 +94,7 @@ jobs:
 
       - name: Display SemVer
         run: |
-          echo "SemVer: $GitVersion_AssemblySemVer"
+          echo "SemVer: $SEMVER"
 
       - name: Create Github Release
         id: create_release
