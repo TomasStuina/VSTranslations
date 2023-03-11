@@ -41,10 +41,13 @@ jobs:
 
     - name: Set version for VSIX
       run: |
-        $manifestPath = 'src\VSTranslations\source.extension.vsixmanifest'
-        $manifestXml = [xml](Get-Content $manifestPath -Raw)
-        $manifestXml.PackageManifest.Metadata.Identity.Version = $env:GitVersion_AssemblySemVer
-        $manifestXml.save($manifestPath)
+        $dirPath = 'src' # update with the root directory of your VSIX manifests
+        $manifestFiles = Get-ChildItem -Path $dirPath -Filter *.vsixmanifest -Recurse
+        foreach ($manifestPath in $manifestFiles) {
+          $manifestXml = [xml](Get-Content $manifestPath -Raw)
+          $manifestXml.PackageManifest.Metadata.Identity.Version = $env:GitVersion_AssemblySemVer
+          $manifestXml.Save($manifestPath)
+        }
 
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
