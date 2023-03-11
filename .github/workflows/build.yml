@@ -100,3 +100,10 @@ jobs:
         name: VSTranslations.${{ env.GITVERSION_SEMVER }}
         path: |
           artifacts/*.vsix
+
+    - name: Publish Coverage
+      uses: actions/upload-artifact@v3
+      with:
+        name: Coverage.${{ env.GITVERSION_SEMVER }}
+        path: |
+          coveragereport/*.*
