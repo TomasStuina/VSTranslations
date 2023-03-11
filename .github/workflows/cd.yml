@@ -103,43 +103,53 @@ jobs:
           $commitLog = git log "$(git describe --tags --abbrev=0)..HEAD" --pretty=format:"- %s" | Out-String 
           Out-File release_note.md -Encoding utf8 -InputObject $("What's new:`r`n`r`n" + $commitLog)
 
-      - name: Display SemVer
-        run: |
-          echo "SemVer: $SEMVER"
-
-      - name: Create Github Release
-        id: create_release
-        uses: actions/create-release@v3
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ env.SEMVER }}
-          release_name:  ${{ env.SEMVER }}
+          release_name: ${{ env.SEMVER }}
           #body_path: release_note.md
           draft: false
           prerelease: false
+          files: |
+            dist/VSTranslations.Plugin.GoogleTranslate.vsix
+            dist/VSTranslations.vsix
 
-      - uses: actions/download-artifact@v3
-        with:
-          name: VSTranslations.${{ env.SEMVER }}
-          path: dist/
+      #- name: Create Github Release
+      #  id: create_release
+      #  uses: actions/create-release@v3
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    tag_name: ${{ env.SEMVER }}
+      #    release_name:  ${{ env.SEMVER }}
+      #    #body_path: release_note.md
+      #    draft: false
+      #    prerelease: false
 
-      - name: Upload Release VSTranslations VSIX Asset
-        uses: actions/upload-release-asset@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: 'dist/VSTranslations.vsix'
-          asset_name: VSTranslations.vsix
-          asset_content_type: binary/octet-stream
+      #- uses: actions/download-artifact@v3
+      #  with:
+      #    name: VSTranslations.${{ env.SEMVER }}
+      #    path: dist/
 
-      - name: Upload Release VSTranslations Google Plugin VSIX Asset
-        uses: actions/upload-release-asset@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: 'dist/VSTranslations.Plugin.GoogleTranslate.vsix'
-          asset_name: VSTranslations.Plugin.GoogleTranslate.vsix
-          asset_content_type: binary/octet-stream
+      #- name: Upload Release VSTranslations VSIX Asset
+      #  uses: actions/upload-release-asset@v3
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #    asset_path: 'dist/VSTranslations.vsix'
+      #    asset_name: VSTranslations.vsix
+      #    asset_content_type: binary/octet-stream
+
+      #- name: Upload Release VSTranslations Google Plugin VSIX Asset
+      #  uses: actions/upload-release-asset@v3
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #    asset_path: 'dist/VSTranslations.Plugin.GoogleTranslate.vsix'
+      #    asset_name: VSTranslations.Plugin.GoogleTranslate.vsix
+      #    asset_content_type: binary/octet-stream
