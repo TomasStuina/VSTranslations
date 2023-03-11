@@ -41,8 +41,8 @@ jobs:
 
     - name: Set version for VSIX
       run: |
-        $dirPath = 'src' # update with the root directory of your VSIX manifests
-        $manifestFiles = Get-ChildItem -Path $dirPath -Filter *.vsixmanifest -Recurse
+        $dirPath = 'src'
+        $manifestFiles = Get-ChildItem -Path $dirPath -Filter source.extension.vsixmanifest -Recurse
         foreach ($manifestPath in $manifestFiles) {
           $manifestXml = [xml](Get-Content $manifestPath -Raw)
           $manifestXml.PackageManifest.Metadata.Identity.Version = $env:GitVersion_AssemblySemVer
