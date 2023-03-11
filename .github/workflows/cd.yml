@@ -90,6 +90,10 @@ jobs:
           $commitLog = git log "$(git describe --tags --abbrev=0)..HEAD" --pretty=format:"- %s" | Out-String 
           Out-File release_note.md -Encoding utf8 -InputObject $("What's new:`r`n`r`n" + $commitLog)
 
+      - name: Display SemVer
+        run: |
+          echo "SemVer: $GitVersion_AssemblySemVer"
+
       - name: Create Github Release
         id: create_release
         uses: actions/create-release@v1
