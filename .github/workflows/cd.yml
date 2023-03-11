@@ -13,6 +13,8 @@ jobs:
   build:
     # runs-on: windows-latest
     runs-on: self-hosted
+    outputs:
+      semVer: ${{ steps.gitversion.outputs.semVer }}
     steps:
     - name: Set git core.longpaths flag
       run: git config --global core.longpaths true
@@ -26,6 +28,7 @@ jobs:
         versionSpec: '5.12.0'
 
     - name: Determine AssemblyInfo Version
+      id: gitversion
       uses: gittools/actions/gitversion/execute@v0.9.15
       with:
         useConfigFile: true
