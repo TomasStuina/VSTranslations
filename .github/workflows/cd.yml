@@ -1,0 +1,75 @@
+name: CD
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+
+ build:
+    # runs-on: windows-latest
+    runs-on: self-hosted
+    steps:
+    - name: Set git core.longpaths flag
+      run: git config --global core.longpaths true
+
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.15
+      with:
+        versionSpec: '5.12.0'
+
+    - name: Determine AssemblyInfo Version
+      uses: gittools/actions/gitversion/execute@v0.9.15
+      with:
+        useConfigFile: true
+        updateAssemblyInfo: true
+
+    - name: Determine Projects Version
+      uses: gittools/actions/gitversion/execute@v0.9.15
+      with:
+        useConfigFile: true
+        additionalArguments: '/updateprojectfiles'
+
+    - name: Set version for VSIX
+      run: |
+        $dirPath = 'src'
+        $manifestFiles = Get-ChildItem -Path $dirPath -Filter source.extension.vsixmanifest -Recurse
+        foreach ($manifestPath in $manifestFiles) {
+          $manifestXml = [xml](Get-Content $manifestPath.FullName -Raw)
+          $manifestXml.PackageManifest.Metadata.Identity.Version = $env:GitVersion_AssemblySemVer
+          $manifestXml.Save($manifestPath.FullName)
+        }
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+      with:
+        msbuild-architecture: x64
+        vs-prerelease: true
+
+    - name: Setup NuGet.exe
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: latest
+
+    - name: Restore NuGet
+      run: nuget restore VSTranslations.sln
+
+    - name: Build Solution
+      run: |
+        msbuild.exe VSTranslations.sln /p:Configuration=Debug /p:Platform="Any CPU" /p:DeployExtension=false
+
+    - name: Run Tests
+      run: |
+        dotnet test VSTranslations.sln --no-build --no-restore --verbosity normal --logger trx --results-directory coverage /p:Configuration=Debug /p:Platform="Any CPU"
+
+    - name: Publish Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: VSTranslations.${{ env.GITVERSION_SEMVER }}
+        path: |
+          src/**/*.vsix
