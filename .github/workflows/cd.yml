@@ -1,13 +1,13 @@
-name: CI
+name: CD
 
 on:
   workflow_dispatch:
-  pull_request:
+  push:
     branches:
       - main
 
 env:
-   Configuration: Debug
+   Configuration: Release
 
 jobs:
 
