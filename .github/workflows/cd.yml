@@ -115,3 +115,13 @@ jobs:
         with:
           name: VSTranslations.${{ env.SEMVER }}
           path: dist/
+
+      - name: Upload Release VSIX Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist\VSTranslations\bin\${{ env.Configuration }}
+          asset_name: VSTranslations.vsix
+          asset_content_type: binary/octet-stream
