@@ -96,8 +96,6 @@ jobs:
           Out-File release_note.md -Encoding utf8 -InputObject $("What's new:`r`n`r`n" + $commitLog)
 
       - name: Display SemVer
-        env:
-          SEMVER: ${{ needs.build.outputs.semVer }}
         run: |
           echo "SemVer: $SEMVER"
 
@@ -107,13 +105,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.GitVersion_AssemblySemVer }}
-          release_name:  ${{ env.GitVersion_AssemblySemVer }}
+          tag_name: ${{ env.SEMVER }}
+          release_name:  ${{ env.SEMVER }}
           #body_path: release_note.md
           draft: false
           prerelease: false
 
       - uses: actions/download-artifact@v3
         with:
-          name: VSTranslations.${{ env.GITVERSION_SEMVER }}
+          name: VSTranslations.${{ env.SEMVER }}
           path: dist/
