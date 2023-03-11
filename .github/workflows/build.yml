@@ -1,20 +1,23 @@
-name: CD
+name: build
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      configuration:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
 
 env:
-   Configuration: Release
+   Configuration: ${{ inputs.configuration }}
 
 jobs:
-  build:
+
+ build:
     # runs-on: windows-latest
     runs-on: self-hosted
-    outputs:
-      semVer: ${{ steps.gitversion.outputs.semVer }}
     steps:
     - name: Set git core.longpaths flag
       run: git config --global core.longpaths true
@@ -28,7 +31,6 @@ jobs:
         versionSpec: '5.12.0'
 
     - name: Determine AssemblyInfo Version
-      id: gitversion
       uses: gittools/actions/gitversion/execute@v0.9.15
       with:
         useConfigFile: true
@@ -72,11 +74,11 @@ jobs:
       run: |
         dotnet test VSTranslations.sln --no-build --no-restore --verbosity normal --logger trx --results-directory coverage /p:Configuration=$env:Configuration /p:Platform="Any CPU"
 
-    - name: Create artifacts Directory
+    - name: Create Artifacts directory
       run: |
         New-Item -ItemType Directory -Force -Path artifacts
 
-    - name: Copy files to artifacts
+    - name: Copy files to Artifacts
       run: |
         Get-ChildItem -Path src -Include *.vsix -Recurse | Copy-Item -Destination artifacts
 
@@ -86,38 +88,3 @@ jobs:
         name: VSTranslations.${{ env.GITVERSION_SEMVER }}
         path: |
           artifacts/*.vsix
-
-  release:
-      needs: build
-      runs-on: self-hosted
-      env:
-        SEMVER: ${{ needs.build.outputs.semVer }}
-      steps:
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-      - name: Checkout repository
-        uses: actions/checkout@v1 
-      - name: Generate release note
-        run: |
-          git fetch --prune --unshallow
-          $commitLog = git log "$(git describe --tags --abbrev=0)..HEAD" --pretty=format:"- %s" | Out-String 
-          Out-File release_note.md -Encoding utf8 -InputObject $("What's new:`r`n`r`n" + $commitLog)
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: VSTranslations.${{ env.SEMVER }}
-          path: dist/
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.SEMVER }}
-          name: ${{ env.SEMVER }}
-          #body_path: release_note.md
-          draft: false
-          prerelease: false
-          files: |
-            dist/VSTranslations.Plugin.GoogleTranslate.vsix
-            dist/VSTranslations.vsix
