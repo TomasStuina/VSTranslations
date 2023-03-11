@@ -72,12 +72,20 @@ jobs:
       run: |
         dotnet test VSTranslations.sln --no-build --no-restore --verbosity normal --logger trx --results-directory coverage /p:Configuration=$env:Configuration /p:Platform="Any CPU"
 
+    - name: Create artifacts Directory
+      run: |
+        New-Item -ItemType Directory -Force -Path artifacts
+
+    - name: Copy files to artifacts
+      run: |
+        Get-ChildItem -Path src -Include *.vsix -Recurse | Copy-Item -Destination artifacts
+
     - name: Publish Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: VSTranslations.${{ env.GITVERSION_SEMVER }}
         path: |
-          src/**/*.vsix
+          artifacts/*.vsix
 
   release:
       needs: build
@@ -101,7 +109,7 @@ jobs:
 
       - name: Create Github Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: actions/create-release@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -117,11 +125,11 @@ jobs:
           path: dist/
 
       - name: Upload Release VSIX Asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: 'dist/VSTranslations/bin/${{ env.Configuration }}/VSTranslations.vsix'
+          asset_path: 'dist/VSTranslations.vsix'
           asset_name: VSTranslations.vsix
           asset_content_type: binary/octet-stream
