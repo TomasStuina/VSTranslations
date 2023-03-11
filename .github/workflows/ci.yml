@@ -32,7 +32,6 @@ jobs:
       with:
         useConfigFile: true
         updateAssemblyInfo: true
-        updateAssemblyInfoFilename: true
 
     - name: Set version for VSIX
       run: |
