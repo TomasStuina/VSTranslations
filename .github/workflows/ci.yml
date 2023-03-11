@@ -70,11 +70,11 @@ jobs:
       run: |
         dotnet test VSTranslations.sln --no-build --no-restore --verbosity normal --logger trx --results-directory coverage /p:Configuration=$env:Configuration /p:Platform="Any CPU"
 
-    - name: Create artifacts Directory
+    - name: Create Artifacts directory
       run: |
         New-Item -ItemType Directory -Force -Path artifacts
 
-    - name: Copy files to artifacts
+    - name: Copy files to Artifacts
       run: |
         Get-ChildItem -Path src -Include *.vsix -Recurse | Copy-Item -Destination artifacts
 
