@@ -93,6 +93,8 @@ jobs:
           Out-File release_note.md -Encoding utf8 -InputObject $("What's new:`r`n`r`n" + $commitLog)
 
       - name: Display SemVer
+        env:
+          SEMVER: ${{ needs.build.outputs.semVer }}
         run: |
           echo "SemVer: $SEMVER"
 
