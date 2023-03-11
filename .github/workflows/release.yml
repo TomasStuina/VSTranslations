@@ -1,0 +1,51 @@
+name: release
+
+on:
+  workflow_call:
+    inputs:
+      configuration:
+        required: true
+        type: string
+      semVer:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+env:
+  SEMVER: ${{ inputs.semVer }}
+
+jobs:
+  release:
+      runs-on: self-hosted
+      # runs-on: windows-latest
+      steps:
+      - name: Support longpaths
+        run: git config --system core.longpaths true
+      - name: Checkout repository
+        uses: actions/checkout@v1 
+      - name: Generate release note
+        run: |
+          git fetch --prune --unshallow
+          $commitLog = git log "$(git describe --tags --abbrev=0)..HEAD" --pretty=format:"- %s" | Out-String 
+          Out-File release_note.md -Encoding utf8 -InputObject $("What's new:`r`n`r`n" + $commitLog)
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: VSTranslations.${{ env.SEMVER }}
+          path: dist/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.SEMVER }}
+          name: ${{ env.SEMVER }}
+          #body_path: release_note.md
+          draft: false
+          prerelease: false
+          files: |
+            dist/VSTranslations.Plugin.GoogleTranslate.vsix
+            dist/VSTranslations.vsix

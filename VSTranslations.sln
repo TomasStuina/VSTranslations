@@ -23,8 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{FFA2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{A8AA55E1-37AA-4558-9978-A43ABEA9E1EF}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
 		.github\workflows\cd.yml = .github\workflows\cd.yml
 		.github\workflows\ci.yml = .github\workflows\ci.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSTranslations.Plugin.GoogleTranslate.UnitTests", "tests\VSTranslations.Plugin.GoogleTranslate.UnitTests\VSTranslations.Plugin.GoogleTranslate.UnitTests.csproj", "{D5083806-3FD9-459C-857B-A1FAFD425D14}"

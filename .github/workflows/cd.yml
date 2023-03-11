@@ -11,113 +11,17 @@ env:
 
 jobs:
   build:
-    # runs-on: windows-latest
-    runs-on: self-hosted
-    outputs:
-      semVer: ${{ steps.gitversion.outputs.semVer }}
-    steps:
-    - name: Set git core.longpaths flag
-      run: git config --global core.longpaths true
-
-    - name: Checkout
-      uses: actions/checkout@v1
-
-    - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.15
-      with:
-        versionSpec: '5.12.0'
-
-    - name: Determine AssemblyInfo Version
-      id: gitversion
-      uses: gittools/actions/gitversion/execute@v0.9.15
-      with:
-        useConfigFile: true
-        updateAssemblyInfo: true
-
-    - name: Determine Projects Version
-      uses: gittools/actions/gitversion/execute@v0.9.15
-      with:
-        useConfigFile: true
-        additionalArguments: '/updateprojectfiles'
-
-    - name: Set version for VSIX
-      run: |
-        $dirPath = 'src'
-        $manifestFiles = Get-ChildItem -Path $dirPath -Filter source.extension.vsixmanifest -Recurse
-        foreach ($manifestPath in $manifestFiles) {
-          $manifestXml = [xml](Get-Content $manifestPath.FullName -Raw)
-          $manifestXml.PackageManifest.Metadata.Identity.Version = $env:GitVersion_AssemblySemVer
-          $manifestXml.Save($manifestPath.FullName)
-        }
-
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
-      with:
-        msbuild-architecture: x64
-        vs-prerelease: true
-
-    - name: Setup NuGet.exe
-      uses: nuget/setup-nuget@v1
-      with:
-        nuget-version: latest
-
-    - name: Restore NuGet
-      run: nuget restore VSTranslations.sln
-
-    - name: Build Solution
-      run: |
-        msbuild.exe VSTranslations.sln /p:Configuration=$env:Configuration /p:Platform="Any CPU" /p:DeployExtension=false
-
-    - name: Run Tests
-      run: |
-        dotnet test VSTranslations.sln --no-build --no-restore --verbosity normal --logger trx --results-directory coverage /p:Configuration=$env:Configuration /p:Platform="Any CPU"
-
-    - name: Create artifacts Directory
-      run: |
-        New-Item -ItemType Directory -Force -Path artifacts
-
-    - name: Copy files to artifacts
-      run: |
-        Get-ChildItem -Path src -Include *.vsix -Recurse | Copy-Item -Destination artifacts
-
-    - name: Publish Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: VSTranslations.${{ env.GITVERSION_SEMVER }}
-        path: |
-          artifacts/*.vsix
-
+    uses: ./.github/workflows/build.yml
+    with:
+      configuration: Release
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+ 
   release:
-      needs: build
-      runs-on: self-hosted
-      env:
-        SEMVER: ${{ needs.build.outputs.semVer }}
-      steps:
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-      - name: Checkout repository
-        uses: actions/checkout@v1 
-      - name: Generate release note
-        run: |
-          git fetch --prune --unshallow
-          $commitLog = git log "$(git describe --tags --abbrev=0)..HEAD" --pretty=format:"- %s" | Out-String 
-          Out-File release_note.md -Encoding utf8 -InputObject $("What's new:`r`n`r`n" + $commitLog)
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: VSTranslations.${{ env.SEMVER }}
-          path: dist/
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.SEMVER }}
-          name: ${{ env.SEMVER }}
-          #body_path: release_note.md
-          draft: false
-          prerelease: false
-          files: |
-            dist/VSTranslations.Plugin.GoogleTranslate.vsix
-            dist/VSTranslations.vsix
+    needs: build
+    uses: ./.github/workflows/build.yml
+    with:
+      configuration: Release
+      semVer: ${{ needs.build.outputs.semVer }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
