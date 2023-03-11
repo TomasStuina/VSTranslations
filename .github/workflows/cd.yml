@@ -103,6 +103,11 @@ jobs:
           $commitLog = git log "$(git describe --tags --abbrev=0)..HEAD" --pretty=format:"- %s" | Out-String 
           Out-File release_note.md -Encoding utf8 -InputObject $("What's new:`r`n`r`n" + $commitLog)
 
+      - uses: actions/download-artifact@v3
+        with:
+          name: VSTranslations.${{ env.SEMVER }}
+          path: dist/
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         env:
@@ -114,8 +119,8 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            dist\VSTranslations.Plugin.GoogleTranslate.vsix
-            dist\VSTranslations.vsix
+            dist/VSTranslations.Plugin.GoogleTranslate.vsix
+            dist/VSTranslations.vsix
 
       #- name: Create Github Release
       #  id: create_release
