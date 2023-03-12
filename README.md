@@ -18,7 +18,7 @@ Download the latest [VSTranslations.vsix](https://github.com/TomasStuina/VSTrans
 
 ![Install](./media/install.png)
 
-> **IMPORTANT!:** VSTranslations is only the core extension. Addtional engine plugin is required for it to properly work (e.g., Google Translate plugin): 
+> **IMPORTANT:** VSTranslations is only the core extension. Addtional engine plugin is required for it to properly work (e.g., Google Translate plugin): 
 >
 >![Installed-Plugins](./media/installed-plugins.png)
 
