@@ -61,4 +61,4 @@ If text is not selected then only that particular line where the cursor is place
 
 ## Notes:
 
-The extension was something that was needed for my daily use, specially in a code base where the written language primarly neither was english, nor my native one. Since I just needed a simple solution to translate foreign text it is not exactly stable, thus there are many potential bugs I am (not) aware of.
+The extension was something that was needed for my daily use, specially in a code base where the written language primarly neither was english, nor my native one. Since I just needed a simple solution to translate foreign text, it is not exactly stable, thus there are many potential bugs I am (not) aware of.
