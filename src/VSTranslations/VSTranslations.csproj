@@ -65,6 +65,7 @@
     <Compile Include="Commands\DynamicSelectCommandBase.cs" />
     <Compile Include="Commands\SelectSourceLanguageCommand.cs" />
     <Compile Include="Commands\SelectTargetLanguageCommand.cs" />
+    <Compile Include="Commands\SwapLanguagesCommand.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Delegates\SpanTranslateDelegate.cs" />
     <Compile Include="Extensions\EditorSettingsExtensions.cs" />

@@ -1,6 +1,7 @@
 ﻿using AutoFixture;
 using FluentAssertions;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VSTranslations.Abstractions.Translating;
@@ -168,6 +169,24 @@ namespace VSTranslations.UnitTests.Services.Translating
 
         [Theory]
         [TranslatorEngineConfigManagerAutoData]
+        public async Task SetSourceLanguageAsync_WhenLanguageChanged_ShouldInvokeSourceLanguageChanged(IFixture fixture,
+            Mock<Func<Language, ValueTask>> languageChanged, Language language)
+        {
+            // Arrange
+            languageChanged.Setup(self => self(language)).Returns(new ValueTask());
+
+            var configManager = fixture.Create<TranslatorEngineConfigManager>();
+            configManager.SourceLanguageChanged = languageChanged.Object;
+
+            // Act
+            await configManager.SetSourceLanguageAsync(language);
+
+            // Assert
+            languageChanged.Verify(self => self(language), Times.Once);
+        }
+
+        [Theory]
+        [TranslatorEngineConfigManagerAutoData]
         public void SetSourceLanguageAsync_WhenEngineNull_ShouldNotThrow(IFixture fixture, Mock<ITranslatorEngineProvider> provider, Language language)
         {
             // Arrange
@@ -206,6 +225,24 @@ namespace VSTranslations.UnitTests.Services.Translating
 
             // Assert
             engineConfig.Verify(self => self.SetTargetLanguageAsync(language), Times.Once);
+        }
+
+        [Theory]
+        [TranslatorEngineConfigManagerAutoData]
+        public async Task SetTargetLanguageAsync_WhenLanguageChanged_ShouldInvokeTargetLanguageChanged(IFixture fixture,
+            Mock<Func<Language, ValueTask>> languageChanged, Language language)
+        {
+            // Arrange
+            languageChanged.Setup(self => self(language)).Returns(new ValueTask());
+
+            var configManager = fixture.Create<TranslatorEngineConfigManager>();
+            configManager.TargetLanguageChanged = languageChanged.Object;
+
+            // Act
+            await configManager.SetTargetLanguageAsync(language);
+
+            // Assert
+            languageChanged.Verify(self => self(language), Times.Once);
         }
 
         [Theory]
