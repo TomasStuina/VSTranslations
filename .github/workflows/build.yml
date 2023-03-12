@@ -18,7 +18,7 @@ env:
 
 jobs:
  build:
-    runs-on: [self-hosted, windows-latest]
+    runs-on: windows-latest # self-hosted
     outputs:
       semVer: ${{ steps.gitversion.outputs.semVer }}
     steps:
