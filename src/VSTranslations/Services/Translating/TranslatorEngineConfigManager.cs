@@ -17,7 +17,11 @@ internal class TranslatorEngineConfigManager
         _translatorEngineProviderFactory = translatorEngineProviderFactory;
     }
 
-    internal static TranslatorEngineConfigManager Default { get; } = new TranslatorEngineConfigManager(async() => await VS.GetMefServiceAsync<ITranslatorEngineProvider>());
+    internal static TranslatorEngineConfigManager Default { get; } = new TranslatorEngineConfigManager(() => VS.GetMefServiceAsync<ITranslatorEngineProvider>());
+
+    internal Func<Language, ValueTask> SourceLanguageChanged { get; set; }
+
+    internal Func<Language, ValueTask> TargetLanguageChanged { get; set; }
 
     /// <summary>
     /// Invokes <see cref="ITranslatorEngineConfig.GetLanguagesAsync"/> of the current <see cref="ITranslatorEngineConfig"/>.
@@ -75,6 +79,11 @@ internal class TranslatorEngineConfigManager
         }
 
         await engineConfig.SetSourceLanguageAsync(language);
+
+        if (SourceLanguageChanged is not null)
+        {
+            await SourceLanguageChanged(language);
+        }
     }
 
     /// <summary>
@@ -89,6 +98,11 @@ internal class TranslatorEngineConfigManager
         }
 
         await engineConfig.SetTargetLanguageAsync(language);
+
+        if (TargetLanguageChanged is not null)
+        {
+            await TargetLanguageChanged(language);
+        }
     }
 
     /// <summary>
