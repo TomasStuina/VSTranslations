@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using VSTranslations.Plugin.Abstractions.Caching;
+using VSTranslations.Plugin.Abstractions.Extensions;
 
 namespace VSTranslations.Plugin.Abstractions.Translating
 {
@@ -11,13 +13,16 @@ namespace VSTranslations.Plugin.Abstractions.Translating
     /// </remarks>
     public abstract class TranslatorEngineBase : ITranslatorEngine
     {
-        protected TranslatorEngineBase(ITranslatorEngineConfig translatorEngineConfig)
+        protected TranslatorEngineBase(ITranslatorEngineConfig translatorEngineConfig, ICacheFactory cacheFactory)
         {
             TranslatorEngineConfig = translatorEngineConfig;
+            Cache = cacheFactory.Create();
         }
 
         /// <inheritdoc/>
         public ITranslatorEngineConfig TranslatorEngineConfig { get; }
+
+        protected ICache Cache { get; }
 
         /// <inheritdoc/>
         public async Task<string> TranslateAsync(string text)
@@ -25,7 +30,8 @@ namespace VSTranslations.Plugin.Abstractions.Translating
             var sourceLanguage = await TranslatorEngineConfig.GetSourceLanguageAsync();
             var targetLanguage = await TranslatorEngineConfig.GetTargetLanguageAsync();
 
-            return await TranslateAsync(text, sourceLanguage, targetLanguage);
+            return await Cache.GetOrSetTranslationAsync(sourceLanguage, text,
+                targetLanguage, async() => await TranslateAsync(text, sourceLanguage, targetLanguage));
         }
 
         protected abstract Task<string> TranslateAsync(string text, Language source, Language destination);

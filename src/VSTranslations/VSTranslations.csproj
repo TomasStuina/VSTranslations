@@ -69,6 +69,7 @@
     <Compile Include="Delegates\SpanTranslateDelegate.cs" />
     <Compile Include="Extensions\EditorSettingsExtensions.cs" />
     <Compile Include="Extensions\FontSizeConverterExtensions.cs" />
+    <Compile Include="Extensions\MemoryCacheExtensions.cs" />
     <Compile Include="Extensions\SnapshotSpanExtensions.cs" />
     <Compile Include="Extensions\TagAggregatorExtensions.cs" />
     <Compile Include="Extensions\TextViewExtensions.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="Services\Adornments\TranslatedTextAdornmentTagger.cs" />
     <Compile Include="Services\Adornments\TranslatedTextAdornmentTaggerProvider.cs" />
     <Compile Include="Services\Adornments\InMemoryAdornmentCache.cs" />
+    <Compile Include="Services\Caching\ConfiguredCacheBase.cs" />
+    <Compile Include="Services\Caching\DefaultMemoryCache.cs" />
+    <Compile Include="Services\Caching\DefaultMemoryCacheFactory.cs" />
     <Compile Include="Services\Settings\EditorSettings.cs" />
     <Compile Include="Services\Settings\EditorSettingsFactory.cs" />
     <Compile Include="Services\Tagging\TranslatedLineGlyphFactoryProvider.cs" />
@@ -161,6 +165,9 @@
     <PackageReference Include="Community.VisualStudio.VSCT" Version="16.0.29.6" PrivateAssets="all" />
     <PackageReference Include="Community.VisualStudio.Toolkit.17" Version="17.0.492" ExcludeAssets="Runtime">
       <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory">
+      <Version>7.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Imaging">
       <Version>17.4.33103.184</Version>
