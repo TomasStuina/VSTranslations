@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using VSTranslations.Plugin.Abstractions.Translating;
 using System.Net;
-using Microsoft.VisualStudio.OLE.Interop;
+using VSTranslations.Plugin.Abstractions.Caching;
 
 namespace VSTranslations.Plugin.GoogleTranslate
 {
@@ -23,13 +23,13 @@ namespace VSTranslations.Plugin.GoogleTranslate
         private readonly HttpClient _httpClient;
 
         [ImportingConstructor]
-        public GoogleTranslatorEngine(ITranslatorEngineConfig<GoogleTranslatorEngine> translatorEngineConfig)
-            : this(new HttpClientHandler(), translatorEngineConfig)
+        public GoogleTranslatorEngine(ITranslatorEngineConfig<GoogleTranslatorEngine> translatorEngineConfig, ICacheFactory cacheFactory)
+            : this(new HttpClientHandler(), translatorEngineConfig, cacheFactory)
         {
         }
 
-        internal GoogleTranslatorEngine(HttpMessageHandler handler, ITranslatorEngineConfig<GoogleTranslatorEngine> translatorEngineConfig)
-            : base(translatorEngineConfig)
+        internal GoogleTranslatorEngine(HttpMessageHandler handler, ITranslatorEngineConfig<GoogleTranslatorEngine> translatorEngineConfig, ICacheFactory cacheFactory)
+            : base(translatorEngineConfig, cacheFactory)
         {
             _httpClient = new HttpClient(handler);
         }

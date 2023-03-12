@@ -1,5 +1,6 @@
 ﻿using AutoFixture;
 using Moq;
+using VSTranslations.Plugin.Abstractions.Caching;
 using VSTranslations.Plugin.Abstractions.Translating;
 using VSTranslations.UnitTests.Common;
 
@@ -16,7 +17,7 @@ internal class GoogleTranslatorEngineCustomization : ICustomization
             .Setup(self => self(It.IsAny<HttpRequestMessage>()))
             .ReturnsAsync(() => fixture.Create<HttpResponseMessage>());
 
-        fixture.Register((HttpMessageHandler messageHandler, ITranslatorEngineConfig<GoogleTranslatorEngine> engineConfig) =>
-            new GoogleTranslatorEngine(messageHandler, engineConfig));
+        fixture.Register((HttpMessageHandler messageHandler, ITranslatorEngineConfig<GoogleTranslatorEngine> engineConfig, ICacheFactory cacheFactory) =>
+            new GoogleTranslatorEngine(messageHandler, engineConfig, cacheFactory));
     }
 }
