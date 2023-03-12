@@ -20,8 +20,6 @@ namespace VSTranslations
     /// </summary>
     internal sealed partial class PackageIds
     {
-        public const int MyMenuGroup = 0x0001;
-        public const int MyCommand = 0x0100;
         public const int VSTranslations_ContextTranslateMenu_TranslateId = 0x0101;
         public const int VSTranslations_ContextTranslateMenu_DeleteTranslationId = 0x0102;
         public const int VSTranslations_TranslationToolbar = 0x1000;
