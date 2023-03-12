@@ -19,7 +19,7 @@ namespace VSTranslations
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
         {
             var documentView = await VS.Documents.GetActiveDocumentViewAsync();
-            if (documentView.TextView is null)
+            if (documentView?.TextView is null)
             {
                 return;
             }
