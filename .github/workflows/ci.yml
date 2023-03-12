@@ -16,7 +16,9 @@ jobs:
       configuration: Debug
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
+
   coverage:
+    needs: build
     uses: ./.github/workflows/coverage.yml
     with:
       configuration: Debug
